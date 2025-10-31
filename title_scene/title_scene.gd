@@ -75,10 +75,11 @@ func _hide_pause_menu_load() -> void:
 
 func clear_inventory_on_new_game() -> void:
 	var inventory : InventoryData = PlayerManager.INVENTORY_DATA
-	for i in inventory.slots.size():
-		if inventory.slots[ i ] != null:
-			inventory.slots[ i ].item_data = ItemData.new()
-			inventory.slots[ i ].set_quantity( 0 )
+	var inventory_slots : Array[ SlotData ] = inventory.inventory_slots()
+	for slot in inventory_slots:
+		if slot:
+			slot.item_data = ItemData.new()
+			slot.quantity = 0
 	pass
 
 

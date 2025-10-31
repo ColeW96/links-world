@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://b0k64bvqi2rmp"]
+[gd_scene load_steps=34 format=4 uid="uid://b0k64bvqi2rmp"]
 
 [ext_resource type="Script" uid="uid://w8x63rjkjqpr" path="res://Levels/Scripts/level.gd" id="1_mwxiv"]
 [ext_resource type="Texture2D" uid="uid://bw6flmnepa4b1" path="res://Art/TileSets/terrain tiles.png" id="4_a2klq"]
@@ -24,7 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://binifasg5yaqv" path="res://Props/Pots/pot.tscn" id="13_r3wde"]
 [ext_resource type="PackedScene" uid="uid://blgpu8v077ojn" path="res://Enemies/Goblin/goblin.tscn" id="14_isjcn"]
 [ext_resource type="PackedScene" uid="uid://jwa73iaqwbb" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="14_mdb57"]
-[ext_resource type="Resource" uid="uid://bq2ynt3c5q8ro" path="res://Items/apple.tres" id="25_a2klq"]
+[ext_resource type="Resource" uid="uid://ba0rx61mbk3i4" path="res://Items/a_ninja_suit.tres" id="25_a2klq"]
+[ext_resource type="PackedScene" uid="uid://bou6q1jldcf6f" path="res://Interactables/TreasureChest/treasure_chest.tscn" id="26_abg8o"]
+[ext_resource type="Resource" uid="uid://cm5vr4l6nufpd" path="res://Items/w_katana.tres" id="27_45xa8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyyha"]
 texture = ExtResource("4_a2klq")
@@ -299,7 +301,6 @@ metadata/_custom_type_script = "uid://kq3q77yube3v"
 
 [sub_resource type="Resource" id="Resource_0j6pc"]
 script = ExtResource("10_q5iyu")
-item = ExtResource("25_a2klq")
 metadata/_custom_type_script = "uid://kq3q77yube3v"
 
 [node name="02" type="Node2D"]
@@ -479,7 +480,7 @@ Complete: true"
 script = SubResource("GDScript_d1jyu")
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("4_icgqb")]
-position = Vector2(208, 160)
+position = Vector2(280, 168)
 
 [node name="ItemPickup" parent="." instance=ExtResource("7_ua1y0")]
 position = Vector2(376.00003, 88)
@@ -504,7 +505,7 @@ drops = Array[ExtResource("10_q5iyu")]([SubResource("Resource_q5iyu")])
 
 [node name="Goblin" parent="." instance=ExtResource("14_isjcn")]
 y_sort_enabled = false
-position = Vector2(152, 184)
+position = Vector2(80, 72)
 
 [node name="Pots" type="Node2D" parent="."]
 z_as_relative = false
@@ -524,7 +525,7 @@ position = Vector2(248, 120)
 
 [node name="Pot4" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(184, 112)
+position = Vector2(240, 152)
 
 [node name="Pot12" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
@@ -532,43 +533,43 @@ position = Vector2(240, 112)
 
 [node name="Pot13" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(240, 176)
+position = Vector2(240, 144)
 
 [node name="Pot14" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(248, 176)
+position = Vector2(248, 144)
 
 [node name="Pot15" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(256, 176)
+position = Vector2(256, 144)
 
 [node name="Pot5" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(192, 112)
+position = Vector2(248, 152)
 
 [node name="Pot6" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(200, 112)
+position = Vector2(256, 152)
 
 [node name="Pot7" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(192, 120)
+position = Vector2(248, 160)
 
 [node name="Pot16" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(184, 120)
+position = Vector2(240, 160)
 
 [node name="Pot17" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(200, 120)
+position = Vector2(256, 160)
 
 [node name="Pot18" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(256, 168)
+position = Vector2(256, 136)
 
 [node name="Pot19" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(240, 168)
+position = Vector2(240, 136)
 
 [node name="Pot20" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
@@ -580,15 +581,15 @@ position = Vector2(256, 120)
 
 [node name="Pot8" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(248, 160)
+position = Vector2(248, 128)
 
 [node name="Pot9" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(256, 160)
+position = Vector2(256, 128)
 
 [node name="Pot10" parent="Pots" instance=ExtResource("13_r3wde")]
 z_as_relative = false
-position = Vector2(240, 160)
+position = Vector2(240, 128)
 
 [node name="LevelTransition" parent="." instance=ExtResource("6_wi5as")]
 position = Vector2(0, 280)
@@ -597,6 +598,14 @@ target_transition_area = "LevelTransition2"
 size = 3
 
 [node name="Slime2" parent="." instance=ExtResource("9_krbdk")]
-position = Vector2(292.15634, 140.16429)
+position = Vector2(336, 72)
 hp = 2
 drops = Array[ExtResource("10_q5iyu")]([SubResource("Resource_0j6pc")])
+
+[node name="ItemPickup5" parent="." instance=ExtResource("7_ua1y0")]
+position = Vector2(240, 272)
+item_data = ExtResource("25_a2klq")
+
+[node name="TreasureChest" parent="." instance=ExtResource("26_abg8o")]
+position = Vector2(304, 272)
+item_data = ExtResource("27_45xa8")

@@ -110,7 +110,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ybfwc"]
-size = Vector2(32, 16)
+size = Vector2(32, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdbti"]
 size = Vector2(10, 6)
@@ -143,6 +143,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_ybfwc")
 debug_color = Color(0, 0.60038817, 0.70000815, 0)

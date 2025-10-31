@@ -18,6 +18,7 @@ var attack : int = 1 :
 		update_damage_values()
 
 var defense : int = 1
+var defense_bonus : int = 0
 
 @onready var lift: PlayerState_Lift = $StateMachine/Lift
 @onready var carry: PlayerState_Carry = $StateMachine/Carry
@@ -39,7 +40,8 @@ func _ready():
 	hit_box.Damaged.connect( _take_damage )
 	update_hp(99)
 	update_damage_values()
-	PlayerManager.player_leveled_up.connect( update_damage_values )
+	PlayerManager.player_leveled_up.connect( _on_player_leveled_up )
+	PlayerManager.INVENTORY_DATA.equipment_changed.connect( _on_equipment_changed )
 	pass
 	
 	
@@ -111,7 +113,7 @@ func _take_damage( hurt_box : HurtBox ) -> void:
 		var damage : int = hurt_box.damage
 		
 		if damage > 0:
-			damage = clampi( damage - defense, 1, damage )
+			damage = clampi( damage - defense_bonus, 1, damage )
 		
 		update_hp( -damage )
 		player_damaged.emit( hurt_box )
@@ -148,6 +150,18 @@ func revive_player() -> void:
 
 
 func update_damage_values() -> void:
-	%AttackHurtBox.damage = attack
-	%ChargeSpinHurtBox.damage = attack + 1
+	var damage_value : int = attack + PlayerManager.INVENTORY_DATA.get_attack_bonus()
+	%AttackHurtBox.damage = damage_value
+	%ChargeSpinHurtBox.damage = damage_value + 1
 	pass
+
+
+func _on_player_leveled_up() -> void:
+	effect_animation_player.play("level_up")
+	update_hp( max_hp )
+	pass
+
+
+func _on_equipment_changed() -> void:
+	update_damage_values()
+	defense_bonus = PlayerManager.INVENTORY_DATA.get_defense_bonus()

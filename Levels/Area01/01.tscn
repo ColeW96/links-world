@@ -337,10 +337,12 @@ side = 1
 
 [node name="Slime" parent="." instance=ExtResource("11_an23e")]
 position = Vector2(312, 136)
+hp = null
 drops = Array[ExtResource("11_mpmqi")]([SubResource("Resource_mpmqi")])
 
 [node name="Goblin" parent="." instance=ExtResource("12_c2gse")]
 position = Vector2(49.000008, 117)
+xp_reward = 50
 drops = Array[ExtResource("11_mpmqi")]([SubResource("Resource_7f7fh"), SubResource("Resource_udmb2")])
 
 [node name="LevelTransition3" parent="." instance=ExtResource("6_8itkk")]

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EquipableItemData" load_steps=8 format=3 uid="uid://ba0rx61mbk3i4"]
+
+[ext_resource type="Script" uid="uid://2pvh1ycacaiu" path="res://Items/item_effects/item_effect.gd" id="1_y1bvc"]
+[ext_resource type="Script" uid="uid://bw63l7wa46o0x" path="res://Items/Scripts/equipable_item_modifier.gd" id="2_a7jn7"]
+[ext_resource type="Script" uid="uid://bjr4dqi2avaiq" path="res://Items/Scripts/equipable_item_data.gd" id="3_ghfju"]
+[ext_resource type="Texture2D" uid="uid://i3bxkv6dqrkh" path="res://Items/Sprites/gear.png" id="4_jjcnf"]
+
+[sub_resource type="Resource" id="Resource_dchiq"]
+script = ExtResource("2_a7jn7")
+type = 2
+value = 5
+metadata/_custom_type_script = "uid://bw63l7wa46o0x"
+
+[sub_resource type="Resource" id="Resource_y1bvc"]
+script = ExtResource("2_a7jn7")
+type = 1
+metadata/_custom_type_script = "uid://bw63l7wa46o0x"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inskq"]
+atlas = ExtResource("4_jjcnf")
+region = Rect2(128, 0, 32, 32)
+
+[resource]
+script = ExtResource("3_ghfju")
+type = 1
+modifiers = Array[ExtResource("2_a7jn7")]([SubResource("Resource_dchiq"), SubResource("Resource_y1bvc")])
+name = "Ninja Suit"
+description = "This ninja suit is totaly rad, and surprisingly comfy."
+texture = SubResource("AtlasTexture_inskq")
+metadata/_custom_type_script = "uid://bjr4dqi2avaiq"

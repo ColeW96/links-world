@@ -2,9 +2,9 @@ extends CanvasLayer
 
 const TITLE_SCREEN : String = "res://title_scene/title_scene.tscn"
 
-
 signal shown
 signal hidden
+signal preview_stats_changed( item : ItemData )
 
 @onready var audio_stream_player: AudioStreamPlayer = $Control/AudioStreamPlayer
 @onready var tab_container: TabContainer = $Control/TabContainer
@@ -88,6 +88,17 @@ func update_item_description( new_text : String ) -> void:
 	pass
 
 
+func focused_item_changed( slot : SlotData ) -> void:
+	if slot:
+		if slot.item_data:
+			update_item_description( slot.item_data.description )
+			preview_stats( slot.item_data )
+	else:
+		update_item_description( "" )
+		preview_stats( null )
+	pass
+
+
 func play_audio( audio : AudioStream ) -> void:
 	audio_stream_player.stream = audio
 	audio_stream_player.play()
@@ -107,4 +118,9 @@ func _on_title_pressed() -> void:
 	PlayerManager.player_spawned = false
 	hide_pause_menu()
 	LevelManager.load_new_level( TITLE_SCREEN, "", Vector2.ZERO )
+	pass
+
+
+func preview_stats( item : ItemData ) -> void:
+	preview_stats_changed.emit( item )
 	pass

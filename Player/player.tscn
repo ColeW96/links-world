@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://ck1nuiykmmpqw"]
+[gd_scene load_steps=105 format=3 uid="uid://ck1nuiykmmpqw"]
 
 [ext_resource type="Script" uid="uid://lxhnmd6aid4l" path="res://Player/Scripts/Player.gd" id="1_lfmf2"]
 [ext_resource type="Texture2D" uid="uid://dc5putuv8n3g7" path="res://Art/Sprites/Link_SpriteSheet.ase" id="2_pisgm"]
@@ -31,6 +31,8 @@
 [ext_resource type="AudioStream" uid="uid://dygr6j5prngqy" path="res://Player/PlayerAudio/throw.wav" id="21_76lrf"]
 [ext_resource type="Script" uid="uid://q8yhy146lfpk" path="res://Player/Scripts/death_state.gd" id="22_efx54"]
 [ext_resource type="AudioStream" uid="uid://bnx2nsvxe3odr" path="res://Player/PlayerAudio/exhausted.wav" id="23_755ss"]
+[ext_resource type="AudioStream" uid="uid://pjyj7m2ru7pw" path="res://Player/PlayerAudio/level_up_jingle.wav" id="30_i4o1l"]
+[ext_resource type="FontFile" uid="uid://ccvatdmcvqh04" path="res://GUI/fonts/m5x7.ttf" id="32_m0h3t"]
 
 [sub_resource type="Animation" id="Animation_dy65m"]
 length = 0.001
@@ -1896,6 +1898,54 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-14, -38)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_y6uwr"]
 resource_name = "damaged"
@@ -1927,6 +1977,18 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_fs7ks"]
 resource_name = "default"
@@ -1943,16 +2005,124 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7x5p2"]
+resource_name = "level_up"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1.2029141, 1.8247963, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(-14, -30), Vector2(-14, -36), Vector2(-14, -35)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.89751077,
+"start_offset": 0.0,
+"stream": ExtResource("30_i4o1l")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83xs0"]
 _data = {
 &"RESET": SubResource("Animation_vfarp"),
 &"damaged": SubResource("Animation_y6uwr"),
-&"default": SubResource("Animation_fs7ks")
+&"default": SubResource("Animation_fs7ks"),
+&"level_up": SubResource("Animation_7x5p2")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n471f"]
 radius = 13.038404
+
+[sub_resource type="Gradient" id="Gradient_m0h3t"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i4o1l"]
+gradient = SubResource("Gradient_m0h3t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2n6q"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -250, 0)
+color = Color(0, 0.80252886, 1, 1)
+color_ramp = SubResource("GradientTexture1D_i4o1l")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -2012,6 +2182,7 @@ polygon = PackedVector2Array(5, -1, -5, -1, -9, 4, -11, 7, -10, 9, -9, 10, -7, 1
 
 [node name="ChargeHurtBox" parent="Sprite2D" instance=ExtResource("14_efx54")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, 1)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 256
@@ -2025,6 +2196,7 @@ debug_color = Color(0.7373294, 0.60038817, 0.70000815, 0.42000002)
 
 [node name="ChargeSpinHurtBox" parent="Sprite2D" instance=ExtResource("14_efx54")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, 1)
 rotation = 0.7853982
 scale = Vector2(0.99999994, 0.99999994)
@@ -2166,3 +2338,25 @@ magnet_strength = 0.2
 visible = false
 shape = SubResource("CircleShape2D_n471f")
 debug_color = Color(0.89827347, 0.9853517, 1, 0.034)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -14.0
+offset_top = -38.0
+offset_right = 47.0
+offset_bottom = -20.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("32_m0h3t")
+text = "Level Up!"
+horizontal_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.25
+process_material = SubResource("ParticleProcessMaterial_j2n6q")
