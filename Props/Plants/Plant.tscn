@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://cxlvgvuh2xyoy"]
+
+[ext_resource type="Script" uid="uid://btordju060tkc" path="res://Props/Plants/plant.gd" id="1_akllp"]
+[ext_resource type="Texture2D" uid="uid://tcxe7dka65wo" path="res://Props/Sprites/grass_plant_01.ase" id="2_w3sfv"]
+[ext_resource type="PackedScene" uid="uid://dvquay61eftw6" path="res://GeneralNodes/HitBox/hit_box.tscn" id="3_oun8e"]
+[ext_resource type="PackedScene" uid="uid://bhddv5qn6ql32" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="4_rnnc5"]
+[ext_resource type="AudioStream" uid="uid://dj40q0wiwxev7" path="res://Props/Audio/walk-on-grass.mp3" id="4_w3sfv"]
+[ext_resource type="Script" uid="uid://1qdy6llpnjam" path="res://Props/Scripts/plant_state_machine.gd" id="5_oun8e"]
+[ext_resource type="Script" uid="uid://c8dxdnyj6ny0o" path="res://Props/Scripts/States/plant_active_state.gd" id="6_xyft2"]
+[ext_resource type="Script" uid="uid://bs0kvmdyjifhx" path="res://Props/Scripts/States/plant_destroy_state.gd" id="7_fdkln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akllp"]
+size = Vector2(14, 12.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyft2"]
+size = Vector2(8, 7)
+
+[sub_resource type="Animation" id="Animation_oun8e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w3sfv"]
+resource_name = "destroy_down"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.22002494,
+"start_offset": 0.0,
+"stream": ExtResource("4_w3sfv")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xyft2"]
+_data = {
+&"RESET": SubResource("Animation_oun8e"),
+&"destroy_down": SubResource("Animation_w3sfv")
+}
+
+[node name="Plant" type="Node2D"]
+script = ExtResource("1_akllp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("2_w3sfv")
+hframes = 5
+
+[node name="HitBox" parent="." instance=ExtResource("3_oun8e")]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -1.75)
+shape = SubResource("RectangleShape2D_akllp")
+debug_color = Color(0.81733644, 0.40600342, 3.85046e-07, 0.41960785)
+
+[node name="HurtBox" parent="." instance=ExtResource("4_rnnc5")]
+z_index = 1
+y_sort_enabled = true
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -2.75)
+shape = SubResource("RectangleShape2D_akllp")
+debug_color = Color(0.81733644, 0.40600342, 3.85046e-07, 0.41960785)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(0, -4)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_xyft2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xyft2")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -3.0
+max_polyphony = 4
+
+[node name="PlantStateMachine" type="Node" parent="."]
+script = ExtResource("5_oun8e")
+
+[node name="Active" type="Node" parent="PlantStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("6_xyft2")
+next_state = NodePath("../Destroy")
+
+[node name="Destroy" type="Node" parent="PlantStateMachine"]
+script = ExtResource("7_fdkln")

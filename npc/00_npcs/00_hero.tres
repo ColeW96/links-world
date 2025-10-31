@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPCResource" load_steps=3 format=3 uid="uid://byogh6p4bfqy1"]
+
+[ext_resource type="Script" uid="uid://xwv73plnsyj0" path="res://npc/scripts/npc_resource.gd" id="1_mdwfn"]
+[ext_resource type="Texture2D" uid="uid://lh6g11defbh2" path="res://npc/sprites/portraits/hero_portrait.png" id="1_mp0q8"]
+
+[resource]
+script = ExtResource("1_mdwfn")
+npc_name = "Link"
+portrait = ExtResource("1_mp0q8")
+metadata/_custom_type_script = "uid://xwv73plnsyj0"

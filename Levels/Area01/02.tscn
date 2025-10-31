@@ -1,0 +1,602 @@
+[gd_scene load_steps=32 format=4 uid="uid://b0k64bvqi2rmp"]
+
+[ext_resource type="Script" uid="uid://w8x63rjkjqpr" path="res://Levels/Scripts/level.gd" id="1_mwxiv"]
+[ext_resource type="Texture2D" uid="uid://bw6flmnepa4b1" path="res://Art/TileSets/terrain tiles.png" id="4_a2klq"]
+[ext_resource type="PackedScene" uid="uid://bntird3iw6uly" path="res://Levels/player_spawn.tscn" id="4_icgqb"]
+[ext_resource type="PackedScene" uid="uid://cyah0dyjtec7v" path="res://npc/npc.tscn" id="4_xflnv"]
+[ext_resource type="Texture2D" uid="uid://cnpp3f4krs3ss" path="res://TileMaps/Sprites/dungeon_entrance.png" id="5_0j6pc"]
+[ext_resource type="Script" uid="uid://cvf1o3mogpf5t" path="res://TileMaps/Scripts/LevelTilemap.gd" id="5_a2klq"]
+[ext_resource type="Resource" uid="uid://b01o7dnqoekrn" path="res://npc/00_npcs/npc_02.tres" id="5_d1jyu"]
+[ext_resource type="PackedScene" uid="uid://cfe2rf5ypwfjn" path="res://npc/npc_behavior_patrol.tscn" id="6_a2klq"]
+[ext_resource type="PackedScene" uid="uid://bsfke41cqr52n" path="res://Levels/level_transition.tscn" id="6_wi5as"]
+[ext_resource type="PackedScene" uid="uid://dsissrfml7goi" path="res://npc/patrol_location.tscn" id="7_0j6pc"]
+[ext_resource type="PackedScene" uid="uid://c8gavt7g23vw8" path="res://Items/ItemPickup/item_pickup.tscn" id="7_ua1y0"]
+[ext_resource type="PackedScene" uid="uid://cw4jdqmlonm8x" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="8_abg8o"]
+[ext_resource type="Resource" uid="uid://ci26no8k3b25t" path="res://Items/gem.tres" id="8_jeo2k"]
+[ext_resource type="Resource" uid="uid://djolgod0l0j6e" path="res://quests/recover_lost_flute.tres" id="9_45xa8"]
+[ext_resource type="PackedScene" uid="uid://5b4sfly6medm" path="res://Enemies/Slime/slime.tscn" id="9_krbdk"]
+[ext_resource type="Script" uid="uid://kq3q77yube3v" path="res://Enemies/Scripts/drop_data.gd" id="10_q5iyu"]
+[ext_resource type="PackedScene" uid="uid://njhj1nbh3ejc" path="res://Interactables/dialog/dialog_interaction.tscn" id="10_sbev4"]
+[ext_resource type="Script" uid="uid://bjspvacm7kobo" path="res://Interactables/dialog/scripts/dialog_text.gd" id="11_vv7nh"]
+[ext_resource type="Script" uid="uid://b3pr08nflve3f" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="12_s3up8"]
+[ext_resource type="AudioStream" uid="uid://505gerx63rfj" path="res://Levels/Music/example_music_01.ogg" id="12_sci0f"]
+[ext_resource type="Script" uid="uid://dwa20vbc657w5" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="13_dffud"]
+[ext_resource type="PackedScene" uid="uid://binifasg5yaqv" path="res://Props/Pots/pot.tscn" id="13_r3wde"]
+[ext_resource type="PackedScene" uid="uid://blgpu8v077ojn" path="res://Enemies/Goblin/goblin.tscn" id="14_isjcn"]
+[ext_resource type="PackedScene" uid="uid://jwa73iaqwbb" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="14_mdb57"]
+[ext_resource type="Resource" uid="uid://bq2ynt3c5q8ro" path="res://Items/apple.tres" id="25_a2klq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyyha"]
+texture = ExtResource("4_a2klq")
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 1, 8, 5, 4, 5, 4, 8, -3, 8, -2, 3, 2, 1)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1, 8, 1, 8, 5, -8, 5)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1, -8, 5, -4, 5, -4, 8, 3, 8, 2, 3, -2, 1)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -8, -3, -8, -3, 8, 4, 8)
+2:1/0 = 0
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -8, 3, -8, 3, 8, -4, 8)
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -1, 8, -5, 4, -5, 4, -8, -3, -8, -2, -3, 2, -1)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, -5, -8, -5)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, -8, -5, -4, -5, -4, -8, 3, -8, 2, -3, -2, -1)
+4:2/0 = 0
+5:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -3, 8, 2, 8, 5, 3, 8, -3, 8, -2, 3, 4, -3)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -3, -8, 2, -8, 5, -3, 8, 3, 8, 2, 3, -4, -3)
+4:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 3, 8, -1, 3, -1, 3, -8, -3, -8, -2, -3, 4, 3)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3, -8, -1, -3, -1, -3, -8, 3, -8, 2, -3, -4, 3)
+4:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+10:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+2:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1d5mv"]
+texture = ExtResource("5_0j6pc")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, 5, 8, 5, 8, 8, 1, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 5, -5, 3, -6, 3, -8, 5, -8, 8, -1, 8)
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5, 8, -5, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -8, 0, 8, -8, 8)
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 0, -8, 0, 8, 8, 8)
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:5/0 = 0
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -8, 0, 8, -8, 8)
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 0, -8, 0, 8, 8, 8)
+5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_1q1va"]
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 16
+sources/0 = SubResource("TileSetAtlasSource_eyyha")
+sources/1 = SubResource("TileSetAtlasSource_1d5mv")
+
+[sub_resource type="GDScript" id="GDScript_d1jyu"]
+script/source = "extends Node
+
+@onready var quest_advance_trigger: QuestAdvanceTrigger = $\"..\"
+
+func _ready() -> void:
+	quest_advance_trigger.advanced.connect( quest_complete )
+	pass
+
+
+func quest_complete() -> void:
+	PlayerManager.INVENTORY_DATA.use_item( load( \"res://Items/magical_flute.tres\" ) )
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_q5iyu"]
+script = ExtResource("10_q5iyu")
+item = ExtResource("8_jeo2k")
+probability = 75.0
+max_amount = 2
+metadata/_custom_type_script = "uid://kq3q77yube3v"
+
+[sub_resource type="Resource" id="Resource_0j6pc"]
+script = ExtResource("10_q5iyu")
+item = ExtResource("25_a2klq")
+metadata/_custom_type_script = "uid://kq3q77yube3v"
+
+[node name="02" type="Node2D"]
+script = ExtResource("1_mwxiv")
+music = ExtResource("12_sci0f")
+
+[node name="Ground" type="TileMapLayer" parent="."]
+z_index = -3
+tile_map_data = PackedByteArray("AAAAAAAAAAAIAAMAAAAAAAEAAAAIAAMAAAAAAAIAAAAIAAMAAAAAAAMAAAAHAAQAAAAAAAQAAAAIAAQAAAAAAAUAAAAHAAIAAAAAAAYAAAAHAAQAAAAAAAcAAAAHAAIAAAAAAAgAAAAHAAQAAAAAAAkAAAAHAAIAAAAAAAoAAAAHAAMAAAAAAAsAAAAIAAQAAAAAAAwAAAAIAAMAAAAAAA0AAAAHAAMAAAAAAA4AAAAHAAIAAAAAAA8AAAAIAAQAAAAAABAAAAAHAAQAAAAAABEAAAAIAAQAAAAAABIAAAAIAAIAAAAAABMAAAAIAAIAAAAAABQAAAAHAAMAAAAAABUAAAAHAAIAAAABAAAAAAAIAAQAAAABAAEAAAAIAAQAAAABAAIAAAAIAAMAAAABAAMAAAAIAAIAAAABAAQAAAAIAAIAAAABAAUAAAAHAAMAAAABAAYAAAAHAAMAAAABAAcAAAAIAAMAAAABAAgAAAAHAAIAAAABAAkAAAAHAAMAAAABAAoAAAAHAAMAAAABAAsAAAAIAAIAAAABAAwAAAAIAAQAAAABAA0AAAAIAAMAAAABAA4AAAAHAAMAAAABAA8AAAAIAAQAAAABABAAAAAHAAQAAAABABEAAAAIAAMAAAABABIAAAAHAAQAAAABABMAAAAIAAMAAAABABQAAAAHAAQAAAABABUAAAAHAAIAAAACAAAAAAAHAAQAAAACAAEAAAAIAAQAAAACAAIAAAAIAAQAAAACAAMAAAAIAAQAAAACAAQAAAAHAAMAAAACAAUAAAAHAAMAAAACAAYAAAAIAAQAAAACAAcAAAAIAAIAAAACAAgAAAAIAAIAAAACAAkAAAAHAAIAAAACAAoAAAAHAAMAAAACAAsAAAAHAAQAAAACAAwAAAAIAAMAAAACAA0AAAAHAAIAAAACAA4AAAAIAAQAAAACAA8AAAAHAAIAAAACABAAAAAHAAMAAAACABEAAAAHAAMAAAACABIAAAAIAAQAAAACABMAAAAIAAIAAAACABQAAAAHAAMAAAACABUAAAAIAAIAAAADAAAAAAAIAAMAAAADAAEAAAAHAAMAAAADAAIAAAAHAAMAAAADAAMAAAAIAAIAAAADAAQAAAAHAAIAAAADAAUAAAAIAAMAAAADAAYAAAAHAAIAAAADAAcAAAAHAAQAAAADAAgAAAAIAAQAAAADAAkAAAAIAAMAAAADAAoAAAAHAAMAAAADAAsAAAAHAAMAAAADAAwAAAAIAAQAAAADAA0AAAAHAAMAAAADAA4AAAAHAAQAAAADAA8AAAAHAAQAAAADABAAAAAIAAQAAAADABEAAAAIAAQAAAADABIAAAAHAAQAAAADABMAAAAIAAIAAAADABQAAAAHAAQAAAADABUAAAAIAAQAAAAEAAAAAAAIAAQAAAAEAAEAAAAIAAIAAAAEAAIAAAAIAAIAAAAEAAMAAAAIAAIAAAAEAAQAAAAHAAMAAAAEAAUAAAAHAAQAAAAEAAYAAAAHAAMAAAAEAAcAAAAIAAMAAAAEAAgAAAAIAAQAAAAEAAkAAAAIAAMAAAAEAAoAAAAHAAMAAAAEAAsAAAAHAAQAAAAEAAwAAAAIAAQAAAAEAA0AAAAHAAQAAAAEAA4AAAAIAAQAAAAEAA8AAAAIAAIAAAAEABAAAAAIAAQAAAAEABEAAAAIAAQAAAAEABIAAAAIAAIAAAAEABMAAAAHAAQAAAAEABQAAAAHAAIAAAAEABUAAAAHAAQAAAAFAAAAAAAIAAIAAAAFAAEAAAAHAAIAAAAFAAIAAAAHAAIAAAAFAAMAAAAHAAIAAAAFAAQAAAAIAAIAAAAFAAUAAAAHAAMAAAAFAAYAAAAIAAQAAAAFAAcAAAAIAAMAAAAFAAgAAAAHAAMAAAAFAAkAAAAIAAIAAAAFAAoAAAAHAAIAAAAFAAsAAAAIAAMAAAAFAAwAAAAIAAIAAAAFAA0AAAAIAAMAAAAFAA4AAAAIAAMAAAAFAA8AAAAIAAMAAAAFABAAAAAHAAIAAAAFABEAAAAIAAQAAAAFABIAAAAHAAIAAAAFABMAAAAIAAIAAAAFABQAAAAHAAQAAAAFABUAAAAHAAMAAAAGAAAAAAAHAAQAAAAGAAEAAAAHAAMAAAAGAAIAAAAIAAIAAAAGAAMAAAAIAAIAAAAGAAQAAAAIAAIAAAAGAAUAAAAIAAQAAAAGAAYAAAAHAAMAAAAGAAcAAAAHAAMAAAAGAAgAAAAHAAMAAAAGAAkAAAAIAAMAAAAGAAoAAAAIAAIAAAAGAAsAAAAIAAQAAAAGAAwAAAAHAAMAAAAGAA0AAAAIAAIAAAAGAA4AAAAHAAMAAAAGAA8AAAAHAAMAAAAGABAAAAAIAAIAAAAGABEAAAAHAAIAAAAGABIAAAAHAAQAAAAGABMAAAAIAAIAAAAGABQAAAAIAAIAAAAGABUAAAAHAAIAAAAHAAAAAAAIAAQAAAAHAAEAAAAHAAIAAAAHAAIAAAAHAAQAAAAHAAMAAAAIAAMAAAAHAAQAAAAHAAQAAAAHAAUAAAAIAAQAAAAHAAYAAAAIAAMAAAAHAAcAAAAIAAIAAAAHAAgAAAAIAAIAAAAHAAkAAAAIAAQAAAAHAAoAAAAIAAIAAAAHAAsAAAAIAAQAAAAHAAwAAAAIAAIAAAAHAA0AAAAHAAIAAAAHAA4AAAAHAAIAAAAHAA8AAAAIAAIAAAAHABAAAAAHAAIAAAAHABEAAAAHAAIAAAAHABIAAAAIAAIAAAAHABMAAAAIAAIAAAAHABQAAAAHAAIAAAAHABUAAAAHAAIAAAAIAAAAAAAHAAIAAAAIAAEAAAAIAAIAAAAIAAIAAAAHAAMAAAAIAAMAAAAIAAMAAAAIAAQAAAAHAAIAAAAIAAUAAAAIAAIAAAAIAAYAAAAHAAQAAAAIAAcAAAAHAAIAAAAIAAgAAAAIAAIAAAAIAAkAAAAIAAQAAAAIAAoAAAAIAAQAAAAIAAsAAAAHAAMAAAAIAAwAAAAIAAIAAAAIAA0AAAAIAAMAAAAIAA4AAAAHAAIAAAAIAA8AAAAHAAQAAAAIABAAAAAHAAIAAAAIABEAAAAHAAQAAAAIABIAAAAHAAQAAAAIABMAAAAHAAIAAAAIABQAAAAIAAIAAAAIABUAAAAHAAQAAAAJAAAAAAAHAAQAAAAJAAEAAAAHAAQAAAAJAAIAAAAIAAIAAAAJAAMAAAAHAAQAAAAJAAQAAAAIAAIAAAAJAAUAAAAIAAMAAAAJAAYAAAAHAAIAAAAJAAcAAAAIAAIAAAAJAAgAAAAIAAIAAAAJAAkAAAAIAAQAAAAJAAoAAAAIAAMAAAAJAAsAAAAHAAIAAAAJAAwAAAAHAAIAAAAJAA0AAAAHAAMAAAAJAA4AAAAHAAMAAAAJAA8AAAAHAAIAAAAJABAAAAAHAAIAAAAJABEAAAAIAAQAAAAJABIAAAAHAAIAAAAJABMAAAAIAAIAAAAJABQAAAAHAAIAAAAJABUAAAAHAAMAAAAKAAAAAAAHAAIAAAAKAAEAAAAIAAIAAAAKAAIAAAAHAAIAAAAKAAMAAAAIAAMAAAAKAAQAAAAIAAIAAAAKAAUAAAAHAAQAAAAKAAYAAAAHAAQAAAAKAAcAAAAHAAQAAAAKAAgAAAAIAAIAAAAKAAkAAAAIAAMAAAAKAAoAAAAIAAQAAAAKAAsAAAAIAAMAAAAKAAwAAAAIAAIAAAAKAA0AAAAIAAIAAAAKAA4AAAAHAAQAAAAKAA8AAAAIAAMAAAAKABAAAAAIAAIAAAAKABEAAAAIAAQAAAAKABIAAAAIAAQAAAAKABMAAAAIAAQAAAAKABQAAAAHAAMAAAAKABUAAAAHAAIAAAALAAAAAAAIAAQAAAALAAEAAAAHAAIAAAALAAIAAAAHAAMAAAALAAMAAAAHAAQAAAALAAQAAAAHAAMAAAALAAUAAAAHAAMAAAALAAYAAAAIAAMAAAALAAcAAAAIAAIAAAALAAgAAAAIAAIAAAALAAkAAAAHAAQAAAALAAoAAAAIAAQAAAALAAsAAAAHAAIAAAALAAwAAAAIAAMAAAALAA0AAAAHAAQAAAALAA4AAAAIAAMAAAALAA8AAAAIAAMAAAALABAAAAAIAAMAAAALABEAAAAIAAMAAAALABIAAAAHAAIAAAALABMAAAAIAAMAAAALABQAAAAIAAQAAAALABUAAAAHAAIAAAAMAAAAAAAHAAIAAAAMAAEAAAAIAAMAAAAMAAIAAAAHAAIAAAAMAAMAAAAIAAQAAAAMAAQAAAAHAAQAAAAMAAUAAAAIAAIAAAAMAAYAAAAIAAQAAAAMAAcAAAAIAAMAAAAMAAgAAAAHAAQAAAAMAAkAAAAHAAMAAAAMAAoAAAAHAAQAAAAMAAsAAAAHAAMAAAAMAAwAAAAIAAMAAAAMAA0AAAAIAAQAAAAMAA4AAAAIAAMAAAAMAA8AAAAHAAQAAAAMABAAAAAHAAMAAAAMABEAAAAHAAIAAAAMABIAAAAIAAQAAAAMABMAAAAHAAQAAAAMABQAAAAHAAIAAAAMABUAAAAHAAQAAAANAAAAAAAIAAQAAAANAAEAAAAIAAQAAAANAAIAAAAHAAIAAAANAAMAAAAHAAQAAAANAAQAAAAHAAIAAAANAAUAAAAHAAIAAAANAAYAAAAHAAMAAAANAAcAAAAHAAQAAAANAAgAAAAIAAQAAAANAAkAAAAIAAIAAAANAAoAAAAHAAMAAAANAAsAAAAHAAMAAAANAAwAAAAIAAMAAAANAA0AAAAHAAMAAAANAA4AAAAHAAIAAAANAA8AAAAIAAQAAAANABAAAAAHAAQAAAANABEAAAAHAAIAAAANABIAAAAIAAQAAAANABMAAAAIAAIAAAANABQAAAAIAAMAAAANABUAAAAIAAQAAAAOAAAAAAAIAAQAAAAOAAEAAAAIAAIAAAAOAAIAAAAHAAQAAAAOAAMAAAAIAAMAAAAOAAQAAAAIAAQAAAAOAAUAAAAHAAMAAAAOAAYAAAAIAAMAAAAOAAcAAAAHAAIAAAAOAAgAAAAHAAMAAAAOAAkAAAAHAAQAAAAOAAoAAAAHAAIAAAAOAAsAAAAHAAQAAAAOAAwAAAAIAAQAAAAOAA0AAAAHAAMAAAAOAA4AAAAHAAMAAAAOAA8AAAAHAAQAAAAOABAAAAAIAAIAAAAOABEAAAAIAAQAAAAOABIAAAAIAAQAAAAOABMAAAAHAAQAAAAOABQAAAAIAAMAAAAOABUAAAAHAAIAAAAPAAAAAAAHAAIAAAAPAAEAAAAHAAIAAAAPAAIAAAAIAAMAAAAPAAMAAAAIAAQAAAAPAAQAAAAIAAIAAAAPAAUAAAAIAAMAAAAPAAYAAAAIAAIAAAAPAAcAAAAHAAQAAAAPAAgAAAAIAAQAAAAPAAkAAAAHAAIAAAAPAAoAAAAHAAQAAAAPAAsAAAAIAAQAAAAPAAwAAAAHAAQAAAAPAA0AAAAHAAQAAAAPAA4AAAAIAAQAAAAPAA8AAAAHAAIAAAAPABAAAAAIAAMAAAAPABEAAAAIAAIAAAAPABIAAAAIAAMAAAAPABMAAAAHAAQAAAAPABQAAAAHAAQAAAAPABUAAAAHAAMAAAAQAAAAAAAHAAQAAAAQAAEAAAAHAAIAAAAQAAIAAAAHAAMAAAAQAAMAAAAIAAIAAAAQAAQAAAAHAAQAAAAQAAUAAAAHAAIAAAAQAAYAAAAIAAIAAAAQAAcAAAAIAAMAAAAQAAgAAAAHAAQAAAAQAAkAAAAHAAMAAAAQAAoAAAAHAAIAAAAQAAsAAAAIAAMAAAAQAAwAAAAHAAQAAAAQAA0AAAAHAAIAAAAQAA4AAAAHAAMAAAAQAA8AAAAHAAIAAAAQABAAAAAHAAIAAAAQABEAAAAHAAIAAAAQABIAAAAIAAIAAAAQABMAAAAHAAIAAAAQABQAAAAIAAQAAAAQABUAAAAHAAQAAAARAAAAAAAHAAIAAAARAAEAAAAIAAQAAAARAAIAAAAIAAIAAAARAAMAAAAHAAIAAAARAAQAAAAHAAMAAAARAAUAAAAHAAQAAAARAAYAAAAHAAMAAAARAAcAAAAIAAMAAAARAAgAAAAIAAQAAAARAAkAAAAIAAIAAAARAAoAAAAHAAMAAAARAAsAAAAIAAMAAAARAAwAAAAHAAMAAAARAA0AAAAHAAMAAAARAA4AAAAIAAMAAAARAA8AAAAHAAMAAAARABAAAAAHAAMAAAARABEAAAAHAAMAAAARABIAAAAIAAMAAAARABMAAAAIAAMAAAARABQAAAAIAAMAAAARABUAAAAIAAIAAAASAAAAAAAIAAMAAAASAAEAAAAHAAIAAAASAAIAAAAIAAQAAAASAAMAAAAHAAIAAAASAAQAAAAHAAQAAAASAAUAAAAIAAIAAAASAAYAAAAHAAIAAAASAAcAAAAHAAIAAAASAAgAAAAHAAQAAAASAAkAAAAHAAQAAAASAAoAAAAIAAMAAAASAAsAAAAHAAMAAAASAAwAAAAHAAIAAAASAA0AAAAIAAMAAAASAA4AAAAIAAMAAAASAA8AAAAHAAMAAAASABAAAAAHAAMAAAASABEAAAAHAAIAAAASABIAAAAIAAIAAAASABMAAAAIAAMAAAASABQAAAAHAAIAAAASABUAAAAIAAMAAAATAAAAAAAHAAQAAAATAAEAAAAHAAQAAAATAAIAAAAHAAIAAAATAAMAAAAIAAIAAAATAAQAAAAHAAMAAAATAAUAAAAIAAQAAAATAAYAAAAHAAIAAAATAAcAAAAIAAMAAAATAAgAAAAHAAQAAAATAAkAAAAIAAMAAAATAAoAAAAIAAMAAAATAAsAAAAHAAIAAAATAAwAAAAIAAMAAAATAA0AAAAHAAMAAAATAA4AAAAHAAMAAAATAA8AAAAHAAIAAAATABAAAAAHAAIAAAATABEAAAAIAAMAAAATABIAAAAHAAMAAAATABMAAAAHAAQAAAATABQAAAAIAAQAAAATABUAAAAHAAMAAAAUAAAAAAAIAAMAAAAUAAEAAAAIAAMAAAAUAAIAAAAIAAQAAAAUAAMAAAAHAAQAAAAUAAQAAAAHAAQAAAAUAAUAAAAIAAMAAAAUAAYAAAAIAAMAAAAUAAcAAAAIAAQAAAAUAAgAAAAHAAMAAAAUAAkAAAAHAAIAAAAUAAoAAAAIAAIAAAAUAAsAAAAHAAIAAAAUAAwAAAAHAAIAAAAUAA0AAAAIAAMAAAAUAA4AAAAHAAMAAAAUAA8AAAAHAAIAAAAUABAAAAAHAAMAAAAUABEAAAAIAAMAAAAUABIAAAAIAAQAAAAUABMAAAAHAAQAAAAUABQAAAAIAAQAAAAUABUAAAAHAAIAAAAVAAAAAAAIAAMAAAAVAAEAAAAIAAMAAAAVAAIAAAAHAAMAAAAVAAMAAAAHAAQAAAAVAAQAAAAIAAIAAAAVAAUAAAAIAAMAAAAVAAYAAAAIAAMAAAAVAAcAAAAHAAMAAAAVAAgAAAAHAAQAAAAVAAkAAAAIAAMAAAAVAAoAAAAIAAMAAAAVAAsAAAAIAAMAAAAVAAwAAAAIAAMAAAAVAA0AAAAIAAIAAAAVAA4AAAAIAAQAAAAVAA8AAAAHAAQAAAAVABAAAAAHAAIAAAAVABEAAAAHAAQAAAAVABIAAAAHAAQAAAAVABMAAAAHAAIAAAAVABQAAAAHAAMAAAAVABUAAAAHAAQAAAAWAAAAAAAHAAIAAAAWAAEAAAAHAAMAAAAWAAIAAAAHAAQAAAAWAAMAAAAHAAIAAAAWAAQAAAAHAAMAAAAWAAUAAAAIAAIAAAAWAAYAAAAIAAQAAAAWAAcAAAAIAAQAAAAWAAgAAAAHAAMAAAAWAAkAAAAIAAMAAAAWAAoAAAAHAAIAAAAWAAsAAAAHAAQAAAAWAAwAAAAHAAIAAAAWAA0AAAAHAAIAAAAWAA4AAAAHAAQAAAAWAA8AAAAHAAQAAAAWABAAAAAIAAIAAAAWABEAAAAHAAMAAAAWABIAAAAHAAIAAAAWABMAAAAHAAQAAAAWABQAAAAIAAQAAAAWABUAAAAIAAIAAAAXAAAAAAAHAAMAAAAXAAEAAAAHAAMAAAAXAAIAAAAHAAMAAAAXAAMAAAAHAAQAAAAXAAQAAAAHAAIAAAAXAAUAAAAHAAMAAAAXAAYAAAAHAAQAAAAXAAcAAAAIAAIAAAAXAAgAAAAHAAIAAAAXAAkAAAAIAAIAAAAXAAoAAAAHAAQAAAAXAAsAAAAIAAQAAAAXAAwAAAAIAAQAAAAXAA0AAAAIAAIAAAAXAA4AAAAIAAIAAAAXAA8AAAAHAAQAAAAXABAAAAAIAAQAAAAXABEAAAAHAAMAAAAXABIAAAAIAAIAAAAXABMAAAAIAAMAAAAXABQAAAAHAAQAAAAXABUAAAAIAAIAAAAYAAAAAAAHAAMAAAAYAAEAAAAIAAIAAAAYAAIAAAAIAAIAAAAYAAMAAAAIAAIAAAAYAAQAAAAHAAQAAAAYAAUAAAAHAAIAAAAYAAYAAAAHAAMAAAAYAAcAAAAIAAMAAAAYAAgAAAAIAAMAAAAYAAkAAAAHAAMAAAAYAAoAAAAHAAQAAAAYAAsAAAAHAAIAAAAYAAwAAAAIAAQAAAAYAA0AAAAIAAMAAAAYAA4AAAAIAAMAAAAYAA8AAAAHAAQAAAAYABAAAAAIAAMAAAAYABEAAAAHAAQAAAAYABIAAAAHAAQAAAAYABMAAAAIAAMAAAAYABQAAAAIAAMAAAAYABUAAAAHAAQAAAAZAAAAAAAHAAMAAAAZAAEAAAAIAAMAAAAZAAIAAAAHAAQAAAAZAAMAAAAIAAIAAAAZAAQAAAAIAAIAAAAZAAUAAAAIAAMAAAAZAAYAAAAIAAMAAAAZAAcAAAAIAAMAAAAZAAgAAAAHAAIAAAAZAAkAAAAHAAQAAAAZAAoAAAAHAAIAAAAZAAsAAAAHAAMAAAAZAAwAAAAHAAIAAAAZAA0AAAAHAAMAAAAZAA4AAAAIAAMAAAAZAA8AAAAHAAIAAAAZABAAAAAHAAQAAAAZABEAAAAIAAIAAAAZABIAAAAHAAQAAAAZABMAAAAHAAQAAAAZABQAAAAHAAMAAAAZABUAAAAIAAQAAAAaAAAAAAAHAAQAAAAaAAEAAAAIAAQAAAAaAAIAAAAHAAMAAAAaAAMAAAAIAAIAAAAaAAQAAAAIAAQAAAAaAAUAAAAIAAIAAAAaAAYAAAAHAAIAAAAaAAcAAAAHAAQAAAAaAAgAAAAHAAIAAAAaAAkAAAAHAAQAAAAaAAoAAAAHAAQAAAAaAAsAAAAHAAQAAAAaAAwAAAAHAAQAAAAaAA0AAAAHAAMAAAAaAA4AAAAIAAQAAAAaAA8AAAAIAAIAAAAaABAAAAAIAAMAAAAaABEAAAAHAAQAAAAaABIAAAAIAAQAAAAaABMAAAAHAAIAAAAaABQAAAAHAAIAAAAaABUAAAAHAAQAAAAbAAAAAAAHAAQAAAAbAAEAAAAHAAQAAAAbAAIAAAAHAAIAAAAbAAMAAAAIAAQAAAAbAAQAAAAIAAMAAAAbAAUAAAAHAAMAAAAbAAYAAAAHAAMAAAAbAAcAAAAHAAIAAAAbAAgAAAAHAAMAAAAbAAkAAAAIAAMAAAAbAAoAAAAHAAMAAAAbAAsAAAAHAAQAAAAbAAwAAAAIAAQAAAAbAA0AAAAIAAQAAAAbAA4AAAAIAAMAAAAbAA8AAAAHAAMAAAAbABAAAAAIAAIAAAAbABEAAAAIAAIAAAAbABIAAAAHAAIAAAAbABMAAAAHAAQAAAAbABQAAAAIAAMAAAAbABUAAAAIAAIAAAAcAAAAAAAHAAMAAAAcAAEAAAAIAAQAAAAcAAIAAAAHAAIAAAAcAAMAAAAHAAIAAAAcAAQAAAAHAAIAAAAcAAUAAAAHAAQAAAAcAAYAAAAIAAMAAAAcAAcAAAAIAAQAAAAcAAgAAAAHAAMAAAAcAAkAAAAIAAMAAAAcAAoAAAAIAAIAAAAcAAsAAAAHAAIAAAAcAAwAAAAHAAQAAAAcAA0AAAAIAAIAAAAcAA4AAAAHAAQAAAAcAA8AAAAHAAIAAAAcABAAAAAIAAQAAAAcABEAAAAIAAIAAAAcABIAAAAHAAQAAAAcABMAAAAIAAIAAAAcABQAAAAHAAQAAAAcABUAAAAHAAQAAAAdAAAAAAAHAAQAAAAdAAEAAAAIAAMAAAAdAAIAAAAHAAQAAAAdAAMAAAAHAAQAAAAdAAQAAAAHAAQAAAAdAAUAAAAHAAIAAAAdAAYAAAAHAAIAAAAdAAcAAAAIAAQAAAAdAAgAAAAIAAMAAAAdAAkAAAAIAAMAAAAdAAoAAAAIAAIAAAAdAAsAAAAIAAIAAAAdAAwAAAAHAAIAAAAdAA0AAAAHAAMAAAAdAA4AAAAHAAIAAAAdAA8AAAAIAAIAAAAdABAAAAAIAAMAAAAdABEAAAAIAAMAAAAdABIAAAAHAAIAAAAdABMAAAAIAAQAAAAdABQAAAAHAAIAAAAdABUAAAAIAAMAAAAeAAAAAAAIAAMAAAAeAAEAAAAHAAIAAAAeAAIAAAAIAAQAAAAeAAMAAAAHAAQAAAAeAAQAAAAHAAIAAAAeAAUAAAAHAAMAAAAeAAYAAAAHAAIAAAAeAAcAAAAHAAQAAAAeAAgAAAAHAAMAAAAeAAkAAAAIAAMAAAAeAAoAAAAIAAQAAAAeAAsAAAAIAAQAAAAeAAwAAAAIAAMAAAAeAA0AAAAHAAIAAAAeAA4AAAAHAAQAAAAeAA8AAAAIAAIAAAAeABAAAAAHAAQAAAAeABEAAAAHAAIAAAAeABIAAAAIAAIAAAAeABMAAAAHAAMAAAAeABQAAAAHAAIAAAAeABUAAAAHAAQAAAAfAAAAAAAHAAIAAAAfAAEAAAAIAAQAAAAfAAIAAAAHAAIAAAAfAAMAAAAHAAIAAAAfAAQAAAAHAAIAAAAfAAUAAAAHAAIAAAAfAAYAAAAHAAQAAAAfAAcAAAAIAAMAAAAfAAgAAAAIAAQAAAAfAAkAAAAIAAQAAAAfAAoAAAAHAAIAAAAfAAsAAAAIAAQAAAAfAAwAAAAHAAIAAAAfAA0AAAAIAAMAAAAfAA4AAAAHAAMAAAAfAA8AAAAIAAIAAAAfABAAAAAHAAIAAAAfABEAAAAHAAIAAAAfABIAAAAIAAIAAAAfABMAAAAIAAMAAAAfABQAAAAIAAMAAAAfABUAAAAHAAMAAAAgAAAAAAAHAAMAAAAgAAEAAAAIAAQAAAAgAAIAAAAIAAMAAAAgAAMAAAAHAAQAAAAgAAQAAAAIAAMAAAAgAAUAAAAHAAIAAAAgAAYAAAAIAAQAAAAgAAcAAAAHAAMAAAAgAAgAAAAHAAQAAAAgAAkAAAAHAAQAAAAgAAoAAAAHAAQAAAAgAAsAAAAIAAQAAAAgAAwAAAAIAAQAAAAgAA0AAAAIAAQAAAAgAA4AAAAIAAQAAAAgAA8AAAAIAAIAAAAgABAAAAAIAAMAAAAgABEAAAAIAAIAAAAgABIAAAAHAAMAAAAgABMAAAAIAAQAAAAgABQAAAAIAAIAAAAgABUAAAAHAAQAAAAhAAAAAAAIAAIAAAAhAAEAAAAHAAMAAAAhAAIAAAAHAAQAAAAhAAMAAAAHAAIAAAAhAAQAAAAHAAQAAAAhAAUAAAAHAAIAAAAhAAYAAAAIAAQAAAAhAAcAAAAIAAIAAAAhAAgAAAAHAAQAAAAhAAkAAAAIAAQAAAAhAAoAAAAHAAIAAAAhAAsAAAAIAAIAAAAhAAwAAAAIAAQAAAAhAA0AAAAIAAIAAAAhAA4AAAAHAAQAAAAhAA8AAAAHAAMAAAAhABAAAAAIAAQAAAAhABEAAAAIAAIAAAAhABIAAAAHAAMAAAAhABMAAAAIAAQAAAAhABQAAAAIAAIAAAAhABUAAAAHAAMAAAAiAAAAAAAHAAIAAAAiAAEAAAAHAAQAAAAiAAIAAAAHAAQAAAAiAAMAAAAHAAMAAAAiAAQAAAAIAAIAAAAiAAUAAAAHAAMAAAAiAAYAAAAHAAIAAAAiAAcAAAAIAAQAAAAiAAgAAAAIAAIAAAAiAAkAAAAHAAMAAAAiAAoAAAAHAAIAAAAiAAsAAAAHAAMAAAAiAAwAAAAIAAQAAAAiAA0AAAAHAAMAAAAiAA4AAAAHAAMAAAAiAA8AAAAIAAMAAAAiABAAAAAIAAQAAAAiABEAAAAIAAIAAAAiABIAAAAHAAMAAAAiABMAAAAHAAQAAAAiABQAAAAIAAIAAAAiABUAAAAHAAQAAAAjAAAAAAAHAAIAAAAjAAEAAAAHAAMAAAAjAAIAAAAIAAQAAAAjAAMAAAAHAAQAAAAjAAQAAAAHAAQAAAAjAAUAAAAIAAQAAAAjAAYAAAAIAAMAAAAjAAcAAAAIAAIAAAAjAAgAAAAHAAQAAAAjAAkAAAAIAAQAAAAjAAoAAAAHAAMAAAAjAAsAAAAHAAQAAAAjAAwAAAAHAAMAAAAjAA0AAAAHAAIAAAAjAA4AAAAHAAMAAAAjAA8AAAAIAAMAAAAjABAAAAAHAAIAAAAjABEAAAAHAAMAAAAjABIAAAAIAAIAAAAjABMAAAAIAAMAAAAjABQAAAAIAAQAAAAjABUAAAAIAAQAAAAkAAAAAAAIAAMAAAAkAAEAAAAIAAQAAAAkAAIAAAAIAAMAAAAkAAMAAAAIAAMAAAAkAAQAAAAIAAMAAAAkAAUAAAAIAAIAAAAkAAYAAAAIAAIAAAAkAAcAAAAHAAQAAAAkAAgAAAAHAAIAAAAkAAkAAAAIAAMAAAAkAAoAAAAIAAQAAAAkAAsAAAAHAAQAAAAkAAwAAAAIAAMAAAAkAA0AAAAHAAIAAAAkAA4AAAAHAAQAAAAkAA8AAAAIAAQAAAAkABAAAAAIAAQAAAAkABEAAAAIAAMAAAAkABIAAAAIAAMAAAAkABMAAAAHAAQAAAAkABQAAAAIAAQAAAAkABUAAAAIAAMAAAAlAAAAAAAIAAMAAAAlAAEAAAAIAAIAAAAlAAIAAAAIAAIAAAAlAAMAAAAHAAIAAAAlAAQAAAAIAAMAAAAlAAUAAAAIAAMAAAAlAAYAAAAIAAMAAAAlAAcAAAAIAAIAAAAlAAgAAAAIAAMAAAAlAAkAAAAIAAIAAAAlAAoAAAAHAAMAAAAlAAsAAAAIAAIAAAAlAAwAAAAIAAIAAAAlAA0AAAAHAAMAAAAlAA4AAAAIAAMAAAAlAA8AAAAIAAQAAAAlABAAAAAIAAMAAAAlABEAAAAIAAMAAAAlABIAAAAIAAMAAAAlABMAAAAIAAMAAAAlABQAAAAIAAIAAAAlABUAAAAIAAIAAAA=")
+tile_set = SubResource("TileSet_1q1va")
+script = ExtResource("5_a2klq")
+tile_size = 16.0
+
+[node name="Walls" type="TileMapLayer" parent="."]
+z_index = -2
+tile_map_data = PackedByteArray("AAAAAAEAAAADAAEAAAAAAAIAAAADAAEAAAAAAAMAAAADAAEAAAAAAAQAAAADAAEAAAAAAAUAAAADAAEAAAAAAAYAAAADAAEAAAAAAAcAAAADAAEAAAAAAAgAAAADAAEAAAAAAAkAAAADAAEAAAAAAAoAAAADAAEAAAAAAAsAAAADAAEAAAAAAAwAAAADAAEAAAAAAA0AAAADAAEAAAAAAA4AAAADAAEAAAAAAA8AAAADAAIAAAAAAAAAAAACAAMAAAABAAAAAAACAAIAAAACAAAAAAACAAIAAAADAAAAAAACAAIAAAAEAAAAAAACAAIAAAAFAAAAAAACAAIAAAAGAAAAAAACAAIAAAAHAAAAAAACAAIAAAAIAAAAAAACAAIAAAAJAAAAAAACAAIAAAAKAAAAAAACAAIAAAALAAAAAAACAAIAAAAMAAAAAAACAAIAAAANAAAAAAACAAIAAAAOAAAAAAACAAIAAAAPAAAAAAACAAIAAAAQAAAAAAACAAIAAAARAAAAAAACAAIAAAASAAAAAAACAAIAAAATAAAAAAACAAIAAAAUAAAAAAACAAIAAAAVAAAAAAACAAIAAAAWAAAAAAACAAIAAAAXAAAAAAACAAIAAAAYAAAAAAACAAIAAAAZAAAAAAACAAIAAAAaAAAAAAACAAIAAAAbAAAAAAACAAIAAAAcAAAAAAACAAIAAAAdAAAAAAACAAIAAAAeAAAAAAACAAIAAAAfAAAAAAACAAIAAAAgAAAAAAACAAIAAAAhAAAAAAACAAIAAAAiAAAAAAACAAIAAAAjAAAAAAACAAIAAAAkAAAAAAACAAIAAAAlAAAAAAADAAMAAAAlAAEAAAABAAEAAAAlAAIAAAABAAEAAAAlAAMAAAABAAEAAAAlAAQAAAABAAEAAAAlAAUAAAABAAEAAAAlAAYAAAABAAEAAAAlAAcAAAABAAEAAAAlAAgAAAABAAEAAAAlAAkAAAABAAEAAAAlAAoAAAABAAEAAAAlAAsAAAABAAEAAAAlAAwAAAABAAEAAAAlAA0AAAABAAEAAAAlAA4AAAABAAEAAAAlAA8AAAABAAEAAAAlABAAAAABAAEAAAAlABEAAAABAAEAAAAlABIAAAABAAEAAAAlABMAAAABAAEAAAAlABQAAAABAAEAAAAlABUAAAADAAQAAAABABUAAAACAAAAAAACABUAAAACAAAAAAADABUAAAACAAAAAAAEABUAAAACAAAAAAAFABUAAAACAAAAAAAGABUAAAACAAAAAAAHABUAAAACAAAAAAAIABUAAAACAAAAAAAJABUAAAACAAAAAAAKABUAAAACAAAAAAALABUAAAACAAAAAAAMABUAAAACAAAAAAANABUAAAACAAAAAAAOABUAAAACAAAAAAAPABUAAAACAAAAAAAQABUAAAACAAAAAAARABUAAAACAAAAAAASABUAAAACAAAAAAATABUAAAACAAAAAAAUABUAAAACAAAAAAAVABUAAAACAAAAAAAWABUAAAACAAAAAAAXABUAAAACAAAAAAAYABUAAAACAAAAAAAZABUAAAACAAAAAAAaABUAAAACAAAAAAAbABUAAAACAAAAAAAcABUAAAACAAAAAAAdABUAAAACAAAAAAAeABUAAAACAAAAAAAfABUAAAACAAAAAAAgABUAAAACAAAAAAAhABUAAAACAAAAAAAiABUAAAACAAAAAAAjABUAAAACAAAAAAAkABUAAAACAAAAAAAAABUAAAACAAQAAAAAABMAAAADAAEAAAAAABQAAAADAAEAAAAAABIAAAADAAAAAAA=")
+tile_set = SubResource("TileSet_1q1va")
+
+[node name="NPC_NERO" parent="." instance=ExtResource("4_xflnv")]
+position = Vector2(408, 232)
+npc_resource = ExtResource("5_d1jyu")
+
+[node name="NpcBehaviorPatrol" parent="NPC_NERO" instance=ExtResource("6_a2klq")]
+
+[node name="PatrolLocation" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(1, 0, 0, 1)
+
+[node name="PatrolLocation2" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(64, 32)
+
+[node name="PatrolLocation3" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(16, -88)
+
+[node name="PatrolLocation4" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(-40, -56)
+
+[node name="PatrolLocation5" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(0, 0, 1, 1)
+position = Vector2(-72, -16)
+
+[node name="PatrolLocation6" parent="NPC_NERO/NpcBehaviorPatrol" instance=ExtResource("7_0j6pc")]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(72, -56)
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" instance=ExtResource("8_abg8o")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("9_45xa8")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" instance=ExtResource("10_sbev4")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("11_vv7nh")
+text = "Yo! Hero! Will you help retrieve my magical
+flute from the dark dungeon?
+Please, pretty please?"
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_s3up8")
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://b3pr08nflve3f"
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("13_dffud")
+text = "You can count on it!"
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://dwa20vbc657w5"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("11_vv7nh")
+text = "Thank you dear Hero! You are a true specimen!"
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="DialogText2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("11_vv7nh")
+text = "Oh, and be careful of the evil wizard who lurks in the dungeon..."
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("14_mdb57")]
+position = Vector2(408, 232)
+signal_name = "selected"
+linked_quest = ExtResource("9_45xa8")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("13_dffud")
+text = "NO!"
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://dwa20vbc657w5"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("11_vv7nh")
+text = "Geez! Some lousy hero you are! [shake][color=orangered]FRICKER!!![/color][/shake]"
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="QuestActivatedSwitch3" parent="NPC_NERO" instance=ExtResource("8_abg8o")]
+check_type = 3
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("9_45xa8")
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if quest is complete"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO/QuestActivatedSwitch3" instance=ExtResource("8_abg8o")]
+position = Vector2(0, -16)
+react_to_global_signal = true
+linked_quest = ExtResource("9_45xa8")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player has quest"
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2" instance=ExtResource("8_abg8o")]
+check_type = 2
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("9_45xa8")
+quest_step = 3
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player is on step: return the magical flute to nero"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch" instance=ExtResource("10_sbev4")]
+position = Vector2(0, 16)
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("11_vv7nh")
+text = "Thank you Hero! I lost my flute in the cave to the [b]West[/b]."
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2" instance=ExtResource("8_abg8o")]
+check_type = 2
+react_to_global_signal = true
+linked_quest = ExtResource("9_45xa8")
+quest_step = 3
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player is on step: return the magical flute to nero"
+
+[node name="DialogInteraction2" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2" instance=ExtResource("10_sbev4")]
+position = Vector2(0, 16)
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2/DialogInteraction2"]
+script = ExtResource("11_vv7nh")
+text = "Wow you found my flute!
+It's not much but here's your reward."
+npc_info = ExtResource("5_d1jyu")
+metadata/_custom_type_script = "uid://bjspvacm7kobo"
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2/DialogInteraction2" instance=ExtResource("14_mdb57")]
+signal_name = "finished"
+linked_quest = ExtResource("9_45xa8")
+quest_step = 3
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Step: 3 - return the magical flute to nero
+Complete: true"
+
+[node name="Node" type="Node" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2/DialogInteraction2/QuestAdvanceTrigger"]
+script = SubResource("GDScript_d1jyu")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_icgqb")]
+position = Vector2(208, 160)
+
+[node name="ItemPickup" parent="." instance=ExtResource("7_ua1y0")]
+position = Vector2(376.00003, 88)
+item_data = ExtResource("8_jeo2k")
+
+[node name="ItemPickup2" parent="." instance=ExtResource("7_ua1y0")]
+position = Vector2(368.00003, 104)
+item_data = ExtResource("8_jeo2k")
+
+[node name="ItemPickup3" parent="." instance=ExtResource("7_ua1y0")]
+position = Vector2(384, 104)
+item_data = ExtResource("8_jeo2k")
+
+[node name="ItemPickup4" parent="." instance=ExtResource("7_ua1y0")]
+position = Vector2(392, 88)
+item_data = ExtResource("8_jeo2k")
+
+[node name="Slime" parent="." instance=ExtResource("9_krbdk")]
+position = Vector2(216, 64)
+hp = 2
+drops = Array[ExtResource("10_q5iyu")]([SubResource("Resource_q5iyu")])
+
+[node name="Goblin" parent="." instance=ExtResource("14_isjcn")]
+y_sort_enabled = false
+position = Vector2(152, 184)
+
+[node name="Pots" type="Node2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="Pot" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(248, 112)
+
+[node name="Pot2" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(256, 112)
+
+[node name="Pot3" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(248, 120)
+
+[node name="Pot4" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(184, 112)
+
+[node name="Pot12" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(240, 112)
+
+[node name="Pot13" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(240, 176)
+
+[node name="Pot14" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(248, 176)
+
+[node name="Pot15" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(256, 176)
+
+[node name="Pot5" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(192, 112)
+
+[node name="Pot6" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(200, 112)
+
+[node name="Pot7" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(192, 120)
+
+[node name="Pot16" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(184, 120)
+
+[node name="Pot17" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(200, 120)
+
+[node name="Pot18" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(256, 168)
+
+[node name="Pot19" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(240, 168)
+
+[node name="Pot20" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(240, 120)
+
+[node name="Pot21" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(256, 120)
+
+[node name="Pot8" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(248, 160)
+
+[node name="Pot9" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(256, 160)
+
+[node name="Pot10" parent="Pots" instance=ExtResource("13_r3wde")]
+z_as_relative = false
+position = Vector2(240, 160)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_wi5as")]
+position = Vector2(0, 280)
+level = "uid://v7ldyr35uhw6"
+target_transition_area = "LevelTransition2"
+size = 3
+
+[node name="Slime2" parent="." instance=ExtResource("9_krbdk")]
+position = Vector2(292.15634, 140.16429)
+hp = 2
+drops = Array[ExtResource("10_q5iyu")]([SubResource("Resource_0j6pc")])

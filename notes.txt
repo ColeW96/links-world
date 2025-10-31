@@ -1,0 +1,18 @@
+Links World : To-Do
+---------------------------
+
+#1. Fix audio levels
+
+#2. Add sword swoosh animation to link
+
+#3. More dungeon puzzles/rooms
+
+#4. Fill out world.tscn and Area01 with more stuff
+
+#5. Add more area scenes
+
+#6. Make a town with villagers
+
+#7. Enemy Pathfinding fix
+
+#8. UI design
