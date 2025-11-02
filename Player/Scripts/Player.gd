@@ -40,6 +40,7 @@ func _ready():
 	hit_box.Damaged.connect( _take_damage )
 	update_hp(99)
 	update_damage_values()
+	SaveManager.game_loaded.connect( update_damage_values )
 	PlayerManager.player_leveled_up.connect( _on_player_leveled_up )
 	PlayerManager.INVENTORY_DATA.equipment_changed.connect( _on_equipment_changed )
 	pass
