@@ -16,6 +16,7 @@ var animation_player : AnimationPlayer
 var destroyed : bool = false
 
 @onready var hurt_box: HurtBox = $HurtBox
+@onready var wall_detect: Area2D = $WallDetect
 
 
 func _ready() -> void:
@@ -36,18 +37,14 @@ func _physics_process(delta: float) -> void:
 	hurt_box.position.y = object_sprite.position.y
 	
 	if object_sprite.position.y >= ground_height:
-		hurt_box.set_deferred("monitoring", true)
-		hurt_box.did_damage.connect( destroy )
+		#hurt_box.set_deferred("monitoring", true)
+		#hurt_box.did_damage.connect( destroy )
 		if destroyed == false:
-			destroy()
+			hit_ground()
 		
 	vertical_velocity += gravity_strength * delta
 	throwable.position += throw_direction * throw_speed * delta
 	pass
-
-
-func _on_body_enter( _b : CharacterBody2D ) -> void:
-	print("someone found")
 
 
 func player_interact() -> void:
@@ -76,14 +73,9 @@ func throw() -> void:
 	vertical_velocity = -throw_height_strength
 	throwable.z_index = 1
 	set_physics_process( true )
-	
-	#hurt_box.set_deferred("monitoring", true)
-	#hurt_box.did_damage.connect( destroy )
-	pass
-
-
-func _new_body_entered( _b : CharacterBody2D ) -> void:
-	print("A new challenger approaches!!!")
+	hurt_box.set_deferred("monitoring", true)
+	hurt_box.did_damage.connect( did_damage )
+	wall_detect.body_entered.connect( _on_body_entered )
 	pass
 
 
@@ -96,6 +88,7 @@ func drop() -> void:
 	throw_speed = 50
 	throwable.z_index = 1
 	set_physics_process( true )
+	wall_detect.body_entered.connect( _on_body_entered )
 	pass
 
 
@@ -130,6 +123,13 @@ func _on_area_exit( _a : Area2D ) -> void:
 	pass
 
 
+func _on_body_entered( _n : Node2D ) -> void:
+	if _n is TileMapLayer:
+		did_damage()
+		print( "wall hit" )
+	pass
+
+
 func setup_hurtbox() -> void:
 	hurt_box.monitoring = false
 	for c in get_children():
@@ -137,4 +137,16 @@ func setup_hurtbox() -> void:
 			var _col : CollisionShape2D = c.duplicate()
 			hurt_box.add_child( _col )
 			_col.debug_color = Color(1,0,0,0.5)
+			var _col_2: CollisionShape2D = c.duplicate()
+			wall_detect.add_child( _col_2 )
+	pass
+
+
+func hit_ground() -> void:
+	destroy()
+	pass
+
+
+func did_damage() -> void:
+	destroy()
 	pass
