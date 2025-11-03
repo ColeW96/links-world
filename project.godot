@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Links_World"
-run/main_scene="uid://v7ldyr35uhw6"
+run/main_scene="uid://b0k64bvqi2rmp"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://Art/Sprites/icon.svg"
@@ -40,6 +40,10 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/nklbdev.aseprite_importers/plugin.cfg")
+
+[global_group]
+
+tilemaps="Tilemaps with footstep sounds, etc."
 
 [gui]
 
