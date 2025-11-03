@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://ck1nuiykmmpqw"]
+[gd_scene load_steps=107 format=3 uid="uid://ck1nuiykmmpqw"]
 
 [ext_resource type="Script" uid="uid://lxhnmd6aid4l" path="res://Player/Scripts/Player.gd" id="1_lfmf2"]
 [ext_resource type="Texture2D" uid="uid://dc5putuv8n3g7" path="res://Art/Sprites/Link_SpriteSheet.ase" id="2_pisgm"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://bnx2nsvxe3odr" path="res://Player/PlayerAudio/exhausted.wav" id="23_755ss"]
 [ext_resource type="AudioStream" uid="uid://pjyj7m2ru7pw" path="res://Player/PlayerAudio/level_up_jingle.wav" id="30_i4o1l"]
 [ext_resource type="FontFile" uid="uid://ccvatdmcvqh04" path="res://GUI/fonts/m5x7.ttf" id="32_m0h3t"]
+[ext_resource type="PackedScene" uid="uid://coyy82xp648u8" path="res://GeneralNodes/footstep_audio_2d/footstep_audio_2d.tscn" id="35_c6x0f"]
 
 [sub_resource type="Animation" id="Animation_dy65m"]
 length = 0.001
@@ -807,6 +808,23 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_d30e8"]
 resource_name = "carry_move_left"
@@ -848,6 +866,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8ynux"]
@@ -891,6 +926,23 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_f4lon"]
 resource_name = "carry_move_up"
@@ -932,6 +984,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_jp1hh"]
@@ -1169,6 +1238,23 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(5, 13)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qemgg"]
 resource_name = "charge_move_left"
@@ -1210,6 +1296,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-10, 8)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8viyr"]
@@ -1253,6 +1356,23 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(8, -9)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_8mwp6"]
 resource_name = "charge_move_up"
@@ -1294,6 +1414,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-6, -15)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FootstepAudio2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_hshwv"]
@@ -1647,6 +1784,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FootstepAudio2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wpjfl"]
 resource_name = "move_left"
@@ -1664,6 +1818,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [12, 13, 14, 15]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FootstepAudio2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_olqyp"]
@@ -1683,6 +1854,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [8, 9, 10, 11]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FootstepAudio2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_nv4vc"]
 resource_name = "move_up2"
@@ -1700,6 +1888,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FootstepAudio2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_p1odr"]
@@ -2295,7 +2500,6 @@ shape = SubResource("CapsuleShape2D_fd4e3")
 debug_color = Color(0.875, 1, 0, 0.41960785)
 
 [node name="Interactions" type="Node2D" parent="."]
-visible = false
 position = Vector2(1, -14)
 script = ExtResource("13_76lrf")
 
@@ -2310,6 +2514,7 @@ shape = SubResource("RectangleShape2D_lfmf2")
 debug_color = Color(0.12315822, 0.55450225, 0, 0.116000004)
 
 [node name="PushArea" type="Area2D" parent="Interactions"]
+visible = false
 collision_layer = 0
 collision_mask = 16
 monitorable = false
@@ -2367,3 +2572,5 @@ lifetime = 0.6
 one_shot = true
 explosiveness = 0.25
 process_material = SubResource("ParticleProcessMaterial_j2n6q")
+
+[node name="FootstepAudio2D" parent="." instance=ExtResource("35_c6x0f")]
