@@ -3,7 +3,7 @@ Links World : To-Do
 
 #1. Fix audio levels
 
-#2. Add sword swoosh animation to link
+#2. Add sword swoosh animation to link - COMPLETE
 
 #3. More dungeon puzzles/rooms
 
@@ -16,3 +16,5 @@ Links World : To-Do
 #7. Enemy Pathfinding fix
 
 #8. UI design
+
+#9. Inventory item swapping with joypad
