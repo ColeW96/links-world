@@ -120,11 +120,12 @@ z_index = 1
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 show_behind_parent = true
+position = Vector2(0, 1)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_u2aal")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, -4)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ybfwc")
 hframes = 16
