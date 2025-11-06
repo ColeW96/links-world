@@ -25,6 +25,8 @@ func _ready() -> void:
 
 
 func _physics_process( _delta: float ) -> void:
+	if Engine.is_editor_hint():
+		return
 	move_and_slide()
 	pass
 

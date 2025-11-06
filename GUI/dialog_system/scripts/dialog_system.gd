@@ -2,12 +2,14 @@
 @icon( "res://GUI/dialog_system/icons/star_bubble.svg" )
 class_name DialogSystemNode extends CanvasLayer
 
+signal started
 signal finished
 signal letter_added( letter : String )
 
 var is_active : bool = false
 var text_in_progress : bool = false
 var waiting_for_choice : bool = false
+var watching_cutscene : bool = false
 
 var text_speed : float = 0.025
 var text_length : int = 0
@@ -40,7 +42,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_active == false:
+	if is_active == false or watching_cutscene == true:
 		return
 	if(
 		event.is_action_pressed("interact") or
@@ -57,24 +59,43 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		elif waiting_for_choice == true:
 			return
-		
-		dialog_item_index += 1
-		if dialog_item_index < dialog_items.size():
-			start_dialog()
-		else:
-			hide_dialog()
+			
+		advance_dialog()
+	pass
+
+
+func advance_dialog() -> void:
+	dialog_item_index += 1
+	if dialog_item_index < dialog_items.size():
+		start_dialog()
+	else:
+		hide_dialog()
 	pass
 
 
 func show_dialog( _items : Array[DialogItem] ) -> void:
 	is_active = true
-	dialog_ui.visible = true
+	
+	if _items:
+		if _items[ 0 ] is DialogCutscene:
+			dialog_ui.visible = false
+		else:
+			dialog_ui.visible = true
+		
+		for i in _items:
+			if i is DialogCutscene:
+				$CutsceneUI/AnimationPlayer.play("start")
+	
 	dialog_ui.process_mode = Node.PROCESS_MODE_ALWAYS
 	dialog_items = _items
 	dialog_item_index = 0
 	get_tree().paused = true
 	await get_tree().process_frame
-	start_dialog()
+	started.emit()
+	if dialog_items.size() == 0:
+		hide_dialog()
+	else:
+		start_dialog()
 	pass
 	
 
@@ -85,6 +106,8 @@ func hide_dialog() -> void:
 	dialog_ui.process_mode = Node.PROCESS_MODE_DISABLED
 	get_tree().paused = false
 	finished.emit()
+	PlayerManager.reset_camera_on_player()
+	$CutsceneUI/AnimationPlayer.play("end")
 	pass
 
 
@@ -97,7 +120,23 @@ func start_dialog() -> void:
 		set_dialog_text( _d as DialogText )
 	elif _d is DialogChoice:
 		set_dialog_choice( _d as DialogChoice )
+	elif _d is DialogCutscene:
+		start_dialog_cutscene( _d as DialogCutscene )
 	pass
+
+
+func start_dialog_cutscene( _d : DialogCutscene ) -> void:
+	watching_cutscene = true
+	_d.play()
+	choice_options.visible = false
+	dialog_ui.visible = false
+	await _d.finished
+	choice_options.visible = true
+	dialog_ui.visible = true
+	watching_cutscene = false
+	advance_dialog()
+	pass
+
 
 # Set dialog and NPC variables, etc based on dialog item parameters.
 # Once set, start text typing timer

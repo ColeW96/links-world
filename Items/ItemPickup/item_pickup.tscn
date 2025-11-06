@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8gavt7g23vw8"]
+[gd_scene load_steps=11 format=3 uid="uid://c8gavt7g23vw8"]
 
 [ext_resource type="Script" uid="uid://cijj824oiiq12" path="res://Items/ItemPickup/item_pickup.gd" id="1_sqb5n"]
 [ext_resource type="AudioStream" uid="uid://dn1hn1unlyr4c" path="res://Items/ItemPickup/item_pickup.wav" id="2_kk735"]
 [ext_resource type="Texture2D" uid="uid://dwqba4p713l84" path="res://Art/Sprites/ShadowTextureTheDood.aseprite" id="2_psevk"]
 [ext_resource type="Texture2D" uid="uid://v1aucw8saw2y" path="res://Items/Sprites/items.png" id="3_g8lk5"]
+[ext_resource type="FontFile" uid="uid://ccvatdmcvqh04" path="res://GUI/fonts/m5x7.ttf" id="5_uw5fr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqb5n"]
 radius = 6.6666665
@@ -55,6 +56,7 @@ collision_layer = 0
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_sqb5n")
+item_count = null
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -81,3 +83,15 @@ libraries = {
 &"": SubResource("AnimationLibrary_uw5fr")
 }
 autoplay = "default"
+
+[node name="CountLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -1.6666665
+offset_right = 22.333334
+offset_bottom = 18.0
+scale = Vector2(0.75, 0.75)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_uw5fr")
+text = "99"
+horizontal_alignment = 1

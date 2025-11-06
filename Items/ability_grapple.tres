@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityItemData" load_steps=5 format=3 uid="uid://dnddox12fubrp"]
+
+[ext_resource type="Script" uid="uid://2pvh1ycacaiu" path="res://Items/item_effects/item_effect.gd" id="1_l03qw"]
+[ext_resource type="Script" uid="uid://bxm7fmo8pmmp" path="res://Items/Scripts/ability_item_data.gd" id="2_dahdj"]
+[ext_resource type="Texture2D" uid="uid://6y8kq5rlyy2m" path="res://Player/Sprites/ability-icons.png" id="3_ihe73"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn5yh"]
+atlas = ExtResource("3_ihe73")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_dahdj")
+type = 1
+name = "Grapple"
+texture = SubResource("AtlasTexture_sn5yh")
+metadata/_custom_type_script = "uid://bxm7fmo8pmmp"

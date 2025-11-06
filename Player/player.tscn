@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://ck1nuiykmmpqw"]
+[gd_scene load_steps=130 format=3 uid="uid://ck1nuiykmmpqw"]
 
 [ext_resource type="Script" uid="uid://lxhnmd6aid4l" path="res://Player/Scripts/Player.gd" id="1_lfmf2"]
 [ext_resource type="Texture2D" uid="uid://dc5putuv8n3g7" path="res://Art/Sprites/Link_SpriteSheet.ase" id="2_pisgm"]
@@ -32,9 +32,19 @@
 [ext_resource type="AudioStream" uid="uid://dygr6j5prngqy" path="res://Player/PlayerAudio/throw.wav" id="21_76lrf"]
 [ext_resource type="Script" uid="uid://q8yhy146lfpk" path="res://Player/Scripts/death_state.gd" id="22_efx54"]
 [ext_resource type="AudioStream" uid="uid://bnx2nsvxe3odr" path="res://Player/PlayerAudio/exhausted.wav" id="23_755ss"]
+[ext_resource type="Script" uid="uid://djp3cfu4nqlnb" path="res://Player/Scripts/player_state_dash.gd" id="26_jp1hh"]
+[ext_resource type="Script" uid="uid://cyhaiemfvw3ke" path="res://Player/Scripts/player_state_bow.gd" id="27_qs4pp"]
+[ext_resource type="Script" uid="uid://dcipbwg4x4gc3" path="res://Player/Scripts/player_state_grapple.gd" id="28_f4lon"]
+[ext_resource type="AudioStream" uid="uid://ce3i0ya3n7nmo" path="res://Player/PlayerAudio/grapple_fire.wav" id="29_6pogt"]
 [ext_resource type="AudioStream" uid="uid://pjyj7m2ru7pw" path="res://Player/PlayerAudio/level_up_jingle.wav" id="30_i4o1l"]
+[ext_resource type="AudioStream" uid="uid://tqc7cuo8nbn7" path="res://Player/PlayerAudio/grapple_stick.wav" id="30_ie76m"]
+[ext_resource type="AudioStream" uid="uid://dfixl8a1ukcrr" path="res://Player/PlayerAudio/grapple_clang.wav" id="31_dy65m"]
 [ext_resource type="FontFile" uid="uid://ccvatdmcvqh04" path="res://GUI/fonts/m5x7.ttf" id="32_m0h3t"]
+[ext_resource type="Script" uid="uid://dbfwg6dp6i1v7" path="res://Player/Scripts/player_state_cutscene.gd" id="32_maysp"]
 [ext_resource type="PackedScene" uid="uid://coyy82xp648u8" path="res://GeneralNodes/footstep_audio_2d/footstep_audio_2d.tscn" id="35_c6x0f"]
+[ext_resource type="Texture2D" uid="uid://cllrq6nojv320" path="res://Player/Sprites/grapple.png" id="38_iyprq"]
+[ext_resource type="Script" uid="uid://bxxceupi8hrki" path="res://GeneralNodes/HurtBox/hurt_box.gd" id="43_dy65m"]
+[ext_resource type="AudioStream" uid="uid://bxlicqwd73y5r" path="res://Player/PlayerAudio/grapple_chain.wav" id="43_ie76m"]
 
 [sub_resource type="Animation" id="Animation_dy65m"]
 length = 0.001
@@ -683,6 +693,74 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [3.141592653589793]
+}
+
+[sub_resource type="Animation" id="Animation_c4i3b"]
+resource_name = "bow_down"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051946416, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [115, 116, 117, 116]
+}
+
+[sub_resource type="Animation" id="Animation_m6nl3"]
+resource_name = "bow_left"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051946416, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [124, 125, 126, 125]
+}
+
+[sub_resource type="Animation" id="Animation_7v2uk"]
+resource_name = "bow_right"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051946416, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [121, 122, 123, 122]
+}
+
+[sub_resource type="Animation" id="Animation_uvbbp"]
+resource_name = "bow_up"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051946416, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [118, 119, 120, 119]
 }
 
 [sub_resource type="Animation" id="Animation_j2n6q"]
@@ -1515,6 +1593,74 @@ tracks/2/keys = {
 "values": [Vector2(-6, -15)]
 }
 
+[sub_resource type="Animation" id="Animation_6eb1q"]
+resource_name = "dash_down"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_1kmt7"]
+resource_name = "dash_left"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_gvnt1"]
+resource_name = "dash_right"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_wvbyc"]
+resource_name = "dash_up"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5]
+}
+
 [sub_resource type="Animation" id="Animation_6pogt"]
 resource_name = "game_over"
 length = 0.4
@@ -1532,9 +1678,77 @@ tracks/0/keys = {
 "values": [112, 113, 114]
 }
 
+[sub_resource type="Animation" id="Animation_8hx1r"]
+resource_name = "grapple_down"
+length = 0.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [127]
+}
+
+[sub_resource type="Animation" id="Animation_kdg72"]
+resource_name = "grapple_left"
+length = 0.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [130]
+}
+
+[sub_resource type="Animation" id="Animation_ntwt4"]
+resource_name = "grapple_right"
+length = 0.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [129]
+}
+
+[sub_resource type="Animation" id="Animation_qas3k"]
+resource_name = "grapple_up"
+length = 0.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
+}
+
 [sub_resource type="Animation" id="Animation_7dp3o"]
 resource_name = "idle_down"
-length = 0.03333667
+length = 0.05
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2050,6 +2264,10 @@ _data = {
 &"attack_left": SubResource("Animation_11gg7"),
 &"attack_right": SubResource("Animation_qpa8y"),
 &"attack_up": SubResource("Animation_sbwqj"),
+&"bow_down": SubResource("Animation_c4i3b"),
+&"bow_left": SubResource("Animation_m6nl3"),
+&"bow_right": SubResource("Animation_7v2uk"),
+&"bow_up": SubResource("Animation_uvbbp"),
 &"carry_down": SubResource("Animation_j2n6q"),
 &"carry_left": SubResource("Animation_qs4pp"),
 &"carry_move_down": SubResource("Animation_iyprq"),
@@ -2067,7 +2285,15 @@ _data = {
 &"charge_move_up": SubResource("Animation_8mwp6"),
 &"charge_right": SubResource("Animation_hshwv"),
 &"charge_up": SubResource("Animation_n471f"),
+&"dash_down": SubResource("Animation_6eb1q"),
+&"dash_left": SubResource("Animation_1kmt7"),
+&"dash_right": SubResource("Animation_gvnt1"),
+&"dash_up": SubResource("Animation_wvbyc"),
 &"death": SubResource("Animation_6pogt"),
+&"grapple_down": SubResource("Animation_8hx1r"),
+&"grapple_left": SubResource("Animation_kdg72"),
+&"grapple_right": SubResource("Animation_ntwt4"),
+&"grapple_up": SubResource("Animation_qas3k"),
 &"idle_down": SubResource("Animation_7dp3o"),
 &"idle_left": SubResource("Animation_fd4e3"),
 &"idle_right": SubResource("Animation_qqcod"),
@@ -2330,9 +2556,12 @@ gravity = Vector3(0, -250, 0)
 color = Color(0, 0.80252886, 1, 1)
 color_ramp = SubResource("GradientTexture1D_i4o1l")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maysp"]
+size = Vector2(14, 18)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
-collision_mask = 16
+collision_mask = 48
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_lfmf2")
@@ -2341,7 +2570,7 @@ script = ExtResource("1_lfmf2")
 position = Vector2(0, -9)
 texture = ExtResource("2_pisgm")
 hframes = 4
-vframes = 29
+vframes = 33
 script = ExtResource("3_j2n6q")
 
 [node name="Sprite2D_Weapon_Below" type="Sprite2D" parent="Sprite2D"]
@@ -2482,6 +2711,25 @@ throw_audio = ExtResource("21_76lrf")
 script = ExtResource("22_efx54")
 exhaust_audio = ExtResource("23_755ss")
 
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("26_jp1hh")
+effect_delay = 0.05
+dash_audio = ExtResource("8_gpjlu")
+
+[node name="Bow" type="Node" parent="StateMachine"]
+script = ExtResource("27_qs4pp")
+
+[node name="Grapple" type="Node" parent="StateMachine"]
+script = ExtResource("28_f4lon")
+grapple_distance = 120.0
+grapple_speed = 600.0
+grapple_fire_audio = ExtResource("29_6pogt")
+grapple_stick_audio = ExtResource("30_ie76m")
+grapple_bounce_audio = ExtResource("31_dy65m")
+
+[node name="Cutscene" type="Node" parent="StateMachine"]
+script = ExtResource("32_maysp")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14)
 zoom = Vector2(3, 3)
@@ -2504,6 +2752,7 @@ position = Vector2(1, -14)
 script = ExtResource("13_76lrf")
 
 [node name="Area2D" type="Area2D" parent="Interactions"]
+visible = false
 collision_layer = 8
 collision_mask = 0
 monitoring = false
@@ -2524,6 +2773,11 @@ script = ExtResource("16_pisgm")
 position = Vector2(-1, 11.5)
 shape = SubResource("RectangleShape2D_pisgm")
 debug_color = Color(0.7655037, 0.14733289, 0.73929507, 0.231)
+
+[node name="GrappleRaycast2D" type="RayCast2D" parent="Interactions"]
+unique_name_in_owner = true
+position = Vector2(-1, 9)
+collision_mask = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -2574,3 +2828,45 @@ explosiveness = 0.25
 process_material = SubResource("ParticleProcessMaterial_j2n6q")
 
 [node name="FootstepAudio2D" parent="." instance=ExtResource("35_c6x0f")]
+
+[node name="GrappleHook" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -5)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GrappleHook"]
+offset_left = -8.0
+offset_right = 24.0
+offset_bottom = 25.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_iyprq")
+patch_margin_top = 16
+patch_margin_bottom = 9
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Control" type="Control" parent="GrappleHook/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GrappleHurtBox" type="Area2D" parent="GrappleHook/NinePatchRect/Control"]
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 256
+monitorable = false
+script = ExtResource("43_dy65m")
+metadata/_custom_type_script = "uid://bxxceupi8hrki"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/NinePatchRect/Control/GrappleHurtBox"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_maysp")
+debug_color = Color(0.7, 0, 0.29166654, 0.16862746)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GrappleHook"]
+stream = ExtResource("43_ie76m")
+volume_db = -8.0

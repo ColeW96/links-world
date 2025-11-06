@@ -4,6 +4,7 @@ class_name PlayerState_Move extends PlayerState
 @onready var idle: PlayerState = $"../Idle"
 @onready var roll: PlayerState = $"../Roll"
 @onready var attack: PlayerState = $"../Attack"
+@onready var dash: PlayerState = $"../Dash"
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
 
 func Enter() -> void:
@@ -35,8 +36,10 @@ func Physics(_delta: float) -> PlayerState:
 func HandleInput(_event: InputEvent) -> PlayerState:
 	if _event.is_action_pressed("roll"):
 		return roll
-	if _event.is_action_pressed("attack"):
+	elif _event.is_action_pressed("attack"):
 		return attack
-	if _event.is_action_pressed("interact"):
+	elif _event.is_action_pressed("interact"):
 		PlayerManager.interact()
+	elif _event.is_action_pressed("dash"):
+		return dash
 	return null

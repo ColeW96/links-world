@@ -13,6 +13,7 @@ var dialog_items : Array[DialogItem]
 
 
 func _ready() -> void:
+	
 	if Engine.is_editor_hint():
 		return
 	
@@ -22,7 +23,6 @@ func _ready() -> void:
 	for c in get_children():
 		if c is DialogItem:
 			dialog_items.append( c )
-	
 	pass
 
 

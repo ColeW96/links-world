@@ -29,4 +29,5 @@ sprite_texture = ExtResource("4_a7jn7")
 name = "Ninja Suit"
 description = "This ninja suit is totaly rad, and surprisingly comfy."
 texture = SubResource("AtlasTexture_inskq")
+cost = 600
 metadata/_custom_type_script = "uid://bjr4dqi2avaiq"

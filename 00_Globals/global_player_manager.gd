@@ -89,3 +89,17 @@ func interact() -> void:
 
 func shake_camera( trauma : float = 1.0 ) -> void:
 	camera_shook.emit( clamp( trauma, 0, 2 ) )
+
+
+func reset_camera_on_player( tween_duration : float = 0.5 ) -> void:
+	var camera : Camera2D = get_viewport().get_camera_2d()
+	if camera:
+		if camera.get_parent() == player:
+			return
+		camera.reparent( player )
+		
+		var tween : Tween = create_tween()
+		tween.set_ease( Tween.EASE_OUT )
+		tween.set_trans( Tween.TRANS_QUAD )
+		tween.tween_property( camera, "position", Vector2( 0, -14 ), tween_duration )
+	pass

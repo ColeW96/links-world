@@ -9,4 +9,5 @@ script = ExtResource("2_tv0w0")
 name = "Nero's Magical Flute"
 description = "This is the Magical Flute that Nero lost in the dungeon"
 texture = ExtResource("3_tv0w0")
+cost = 0
 metadata/_custom_type_script = "uid://dvpilf4wrmpeg"

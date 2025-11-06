@@ -18,3 +18,5 @@ Links World : To-Do
 #8. UI design
 
 #9. Inventory item swapping with joypad
+
+#10. Footstep audio on all TilemapLayers

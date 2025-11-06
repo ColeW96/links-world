@@ -1,6 +1,7 @@
 class_name InventoryData extends Resource
 
 signal equipment_changed
+signal ability_acquired( ability : AbilityItemData )
 
 @export var slots: Array[ SlotData ]
 var equipment_slot_count : int = 4
@@ -20,6 +21,10 @@ func equipment_slots() -> Array[ SlotData ]:
 
 
 func add_item( item : ItemData, count : int = 1 ) -> bool:
+	if item is AbilityItemData:
+		ability_acquired.emit( item )
+		return true
+		
 	for s in slots:
 		if s:
 			if s.item_data == item:
@@ -177,3 +182,12 @@ func get_equipment_bonus( bonus_type : EquipableItemModifier.Type, compare : Equ
 			if m.type == bonus_type:
 				bonus += m.value
 	return bonus
+
+
+func get_item_held_quantity( _item : ItemData ) -> int:
+	for slot in slots:
+		if slot:
+			if slot.item_data:
+				if slot.item_data == _item:
+					return slot.quantity
+	return 0

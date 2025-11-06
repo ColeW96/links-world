@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="bi bi-music-note" viewBox="0 0 24 24">
+  <!-- Generator: Adobe Illustrator 29.7.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 8)  -->
+  <defs>
+	<style>
+	  .st0 {
+		fill: #fff;
+	  }
+
+	  .st1 {
+		fill: url(#linear-gradient);
+	  }
+	</style>
+	<linearGradient id="linear-gradient" x1="12" y1="19.9" x2="12" y2="1.5" gradientUnits="userSpaceOnUse">
+	  <stop offset="0" stop-color="#11003a"/> <!-- 11003a -->
+	  <stop offset="1" stop-color="#8f11bf"/> <!-- 6600bb -->
+	</linearGradient>
+  </defs>
+  <rect class="st1" x="" y="0" width="24" height="24" rx="3.6" ry="3.6"/>
+  <g transform="translate(4,3)">
+	<path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2" fill="white"/>
+	<path fill-rule="evenodd" d="M9 3v10H8V3z" fill="white"/>
+	<path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 5.22V4L8 5z" fill="white"/>
+  </g>
+</svg>

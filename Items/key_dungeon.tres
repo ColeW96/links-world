@@ -13,4 +13,5 @@ script = ExtResource("2_u6d1n")
 name = "Dungeon Key"
 description = "Looks like a standard key. Who knows what kind of doors it will unlock?"
 texture = SubResource("AtlasTexture_y1yal")
+cost = 150
 metadata/_custom_type_script = "uid://dvpilf4wrmpeg"

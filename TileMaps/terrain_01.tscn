@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://mdqjxjr5wbbk"]
+[gd_scene load_steps=11 format=3 uid="uid://mdqjxjr5wbbk"]
 
 [ext_resource type="Texture2D" uid="uid://bw6flmnepa4b1" path="res://Art/TileSets/terrain tiles.png" id="1_l6s16"]
 [ext_resource type="Texture2D" uid="uid://cnpp3f4krs3ss" path="res://TileMaps/Sprites/dungeon_entrance.png" id="2_bpwp4"]
 [ext_resource type="Script" uid="uid://cvf1o3mogpf5t" path="res://TileMaps/Scripts/LevelTilemap.gd" id="3_bpwp4"]
 [ext_resource type="Texture2D" uid="uid://dvwy2uurtq83v" path="res://TileMaps/Sprites/Grass-01.png" id="3_eyyha"]
+[ext_resource type="Texture2D" uid="uid://b6ani1oe7smmo" path="res://Art/TileSets/grass_water.png" id="4_1d5mv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyyha"]
 texture = ExtResource("1_l6s16")
@@ -997,14 +998,130 @@ texture = ExtResource("3_eyyha")
 30:15/0 = 0
 31:15/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iabn0"]
+texture = ExtResource("4_1d5mv")
+6:1/animation_columns = 3
+6:1/animation_speed = 3.0
+6:1/animation_frame_0/duration = 1.0
+6:1/animation_frame_1/duration = 1.0
+6:1/animation_frame_2/duration = 1.0
+6:1/0 = 0
+6:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(3, -6, 8, -6, 8, 8, -5, 8, -5, 1)
+11:1/animation_columns = 3
+11:1/animation_speed = 3.0
+11:1/animation_frame_0/duration = 1.0
+11:1/animation_frame_1/duration = 1.0
+11:1/animation_frame_2/duration = 1.0
+11:1/0 = 0
+11:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 5, 5, 5, 5, 8, -8, 8)
+15:1/0 = 0
+15:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/animation_columns = 3
+1:2/animation_speed = 3.0
+1:2/animation_frame_0/duration = 1.0
+1:2/animation_frame_1/duration = 1.0
+1:2/animation_frame_2/duration = 1.0
+1:2/0 = 0
+1:3/animation_columns = 3
+1:3/animation_speed = 3.0
+1:3/animation_frame_0/duration = 1.0
+1:3/animation_frame_1/duration = 1.0
+1:3/animation_frame_2/duration = 1.0
+1:3/0 = 0
+1:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 6, 8, 6, 8, -8, -8, -8)
+6:3/animation_columns = 3
+6:3/animation_speed = 3.0
+6:3/animation_frame_0/duration = 1.0
+6:3/animation_frame_1/duration = 1.0
+6:3/animation_frame_2/duration = 1.0
+6:3/0 = 0
+6:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(3, 6, 8, 6, 8, -8, -5, -8, -5, -1)
+11:3/animation_columns = 3
+11:3/animation_speed = 3.0
+11:3/animation_frame_0/duration = 1.0
+11:3/animation_frame_1/duration = 1.0
+11:3/animation_frame_2/duration = 1.0
+11:3/0 = 0
+11:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, -5, 5, -5, 5, -8, -8, -8)
+1:4/animation_columns = 3
+1:4/animation_speed = 3.0
+1:4/animation_frame_0/duration = 1.0
+1:4/animation_frame_1/duration = 1.0
+1:4/animation_frame_2/duration = 1.0
+1:4/0 = 0
+1:5/animation_columns = 3
+1:5/animation_speed = 3.0
+1:5/animation_frame_0/duration = 1.0
+1:5/animation_frame_1/duration = 1.0
+1:5/animation_frame_2/duration = 1.0
+1:5/0 = 0
+1:5/0/physics_layer_1/polygon_0/points = PackedVector2Array(-5, -8, 8, -8, 8, 8, -5, 8)
+6:5/animation_columns = 3
+6:5/animation_speed = 3.0
+6:5/animation_frame_0/duration = 1.0
+6:5/animation_frame_1/duration = 1.0
+6:5/animation_frame_2/duration = 1.0
+6:5/0 = 0
+6:5/0/physics_layer_1/polygon_0/points = PackedVector2Array(-3, -6, -8, -6, -8, 8, 5, 8, 5, 1)
+11:5/animation_columns = 3
+11:5/animation_speed = 3.0
+11:5/animation_frame_0/duration = 1.0
+11:5/animation_frame_1/duration = 1.0
+11:5/animation_frame_2/duration = 1.0
+11:5/0 = 0
+11:5/0/physics_layer_1/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 5, -5, 5, -5, 8, 8, 8)
+1:6/animation_columns = 3
+1:6/animation_speed = 3.0
+1:6/animation_frame_0/duration = 1.0
+1:6/animation_frame_1/duration = 1.0
+1:6/animation_frame_2/duration = 1.0
+1:6/0 = 0
+1:7/animation_columns = 3
+1:7/animation_speed = 3.0
+1:7/animation_frame_0/duration = 1.0
+1:7/animation_frame_1/duration = 1.0
+1:7/animation_frame_2/duration = 1.0
+1:7/0 = 0
+1:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(5, -8, -8, -8, -8, 8, 5, 8)
+6:7/animation_columns = 3
+6:7/animation_speed = 3.0
+6:7/animation_frame_0/duration = 1.0
+6:7/animation_frame_1/duration = 1.0
+6:7/animation_frame_2/duration = 1.0
+6:7/0 = 0
+6:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(-3, 6, -8, 6, -8, -8, 5, -8, 5, -1)
+11:7/animation_columns = 3
+11:7/animation_speed = 3.0
+11:7/animation_frame_0/duration = 1.0
+11:7/animation_frame_1/duration = 1.0
+11:7/animation_frame_2/duration = 1.0
+11:7/0 = 0
+11:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -5, -5, -5, -5, -8, 8, -8)
+1:8/animation_columns = 3
+1:8/animation_speed = 3.0
+1:8/animation_frame_0/duration = 1.0
+1:8/animation_frame_1/duration = 1.0
+1:8/animation_frame_2/duration = 1.0
+1:8/0 = 0
+1:1/animation_columns = 3
+1:1/animation_speed = 3.0
+1:1/animation_frame_0/duration = 1.0
+1:1/animation_frame_1/duration = 1.0
+1:1/animation_frame_2/duration = 1.0
+1:1/0 = 0
+1:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -6, 8, -6, 8, 8, -8, 8)
+
 [sub_resource type="TileSet" id="TileSet_1q1va"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 16
+physics_layer_1/collision_layer = 32
+physics_layer_1/collision_mask = 0
 custom_data_layer_0/name = "footstep_type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_eyyha")
 sources/1 = SubResource("TileSetAtlasSource_1d5mv")
 sources/2 = SubResource("TileSetAtlasSource_1q1va")
+sources/3 = SubResource("TileSetAtlasSource_iabn0")
 
 [node name="Terrain01" type="TileMapLayer" groups=["tilemaps"]]
 tile_set = SubResource("TileSet_1q1va")

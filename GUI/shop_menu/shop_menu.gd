@@ -1,0 +1,138 @@
+extends CanvasLayer
+
+const ERROR = preload("uid://dqy34g84mmrf2")
+const OPEN_SHOP = preload("uid://c0h3mcjcm80uy")
+const PURCHASE = preload("uid://d1x7u16o8y3vd")
+const MENU_FOCUS = preload("uid://c6xltqwmr4vb2")
+const MENU_SELECT = preload("uid://ct0amm5wqsxlk")
+const SHOP_ITEM_BUTTON = preload("uid://njthlpyxv225")
+
+var currency : ItemData = preload("uid://ci26no8k3b25t")
+
+signal shown
+signal hidden
+
+@onready var shop_items_container: VBoxContainer = %ShopItemsContainer
+@onready var close_button: Button = %CloseButton
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var gems_label: Label = %GemsLabel
+@onready var item_image: TextureRect = %ItemImage
+@onready var item_name: Label = %ItemName
+@onready var item_description: Label = %ItemDescription
+@onready var item_price: Label = %ItemPrice
+@onready var item_held_count: Label = %ItemHeldCount
+@onready var gems_animation_player: AnimationPlayer = $Control/PanelContainer/AnimationPlayer
+
+
+var is_active : bool = false
+
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	hide_menu()
+	close_button.pressed.connect( hide_menu )
+	pass
+
+
+func _unhandled_input( event: InputEvent ) -> void:
+	if is_active == false:
+		return
+	
+	if event.is_action_pressed("pause"):
+		get_viewport().set_input_as_handled()
+		hide_menu()
+	pass
+
+
+func show_menu( items : Array[ ItemData ], dialog_triggered : bool = true ) -> void:
+	print( items, items.size() )
+	if dialog_triggered:
+		await DialogSystem.finished
+	enable_menu()
+	populate_item_list( items )
+	update_gems()
+	play_audio(OPEN_SHOP)
+	shop_items_container.get_child( 0 ).grab_focus()
+	shown.emit()
+	pass
+
+
+func hide_menu() -> void:
+	enable_menu( false )
+	clear_item_list()
+	hidden.emit()
+	pass
+
+
+func enable_menu( _enabled : bool = true ) -> void:
+	get_tree().paused = _enabled
+	visible = _enabled
+	is_active = _enabled
+	pass
+
+
+func update_gems() -> void:
+	gems_label.text = str( get_item_quantity( currency ) )
+	pass
+
+
+func get_item_quantity( item : ItemData ) -> int:
+	return PlayerManager.INVENTORY_DATA.get_item_held_quantity( item )
+
+
+func clear_item_list() -> void:
+	for c in shop_items_container.get_children():
+		c.queue_free()
+	pass
+
+
+func populate_item_list( items : Array[ ItemData ] ) -> void:
+	for item in items:
+		var shop_item : ShopItemButton = SHOP_ITEM_BUTTON.instantiate()
+		shop_item.setup_item( item )
+		shop_items_container.add_child( shop_item )
+		shop_item.focus_entered.connect( update_item_details.bind( item ) )
+		shop_item.pressed.connect( purchase_item.bind( item ) )
+		#connect to signals
+		pass
+	pass
+
+
+func play_audio( _audio : AudioStream ) -> void:
+	audio_stream_player.stream = _audio
+	audio_stream_player.play()
+	pass
+
+
+func focused_item_changed( item : ItemData ) -> void:
+	play_audio( MENU_FOCUS )
+	if item:
+		update_item_details( item )
+	pass
+
+
+func update_item_details( item : ItemData ) -> void:
+	item_image.texture = item.texture
+	item_name.text = item.name
+	item_description.text = item.description
+	item_price.text = str( item.cost )
+	item_held_count.text = str( get_item_quantity( item ) )
+	pass
+
+
+func purchase_item( item : ItemData ) -> void:
+	var can_purchase : bool = get_item_quantity( currency ) >= item.cost
+	if can_purchase:
+		play_audio( PURCHASE )
+		var inv : InventoryData = PlayerManager.INVENTORY_DATA
+		inv.add_item( item )
+		inv.use_item( currency, item.cost )
+		update_gems()
+		update_item_details( item )
+		pass
+	else:
+		play_audio( ERROR )
+		gems_animation_player.play("not_enough_gems")
+		gems_animation_player.seek( 0 )
+		pass
+	pass

@@ -15,11 +15,14 @@ var current_save : Dictionary = {
 		attack = 1,
 		defense = 1,
 		pos_x = 0,
-		pos_y = 0
+		pos_y = 0,
+		arrow_count = 0,
+		bomb_count = 0
 	},
 	items = [],
 	persistence = [],
 	quests = [],
+	abilities = [ "", "", "", "" ]
 }
 
 
@@ -47,11 +50,14 @@ func new_game() -> void:
 		attack = 1,
 		defense = 1,
 		pos_x = 0,
-		pos_y = 0
+		pos_y = 0,
+		arrow_count = 0,
+		bomb_count = 0
 	},
 	items = [],
 	persistence = [],
 	quests = [],
+	abilities = [ "", "", "", "" ]
 	}
 	current_save = new_save
 	var save_json = JSON.stringify( current_save )
@@ -76,11 +82,15 @@ func load_game() -> void:
 	
 	PlayerManager.set_player_position( Vector2( current_save.player.pos_x, current_save.player.pos_y ) )
 	PlayerManager.set_health( current_save.player.hp, current_save.player.max_hp )
+	
 	var p: Player = PlayerManager.player
 	p.level = current_save.player.level
 	p.xp = current_save.player.xp
 	p.attack = current_save.player.attack
 	p.defense = current_save.player.defense
+	p.arrow_count = current_save.player.arrow_count
+	p.bomb_count = current_save.player.bomb_count
+	
 	PlayerManager.INVENTORY_DATA.parse_save_data( current_save.items )
 	QuestManager.current_quests = current_save.quests
 	
@@ -100,6 +110,9 @@ func update_player_data() ->void:
 	current_save.player.xp = p.xp
 	current_save.player.attack = p.attack
 	current_save.player.defense = p.attack
+	current_save.player.arrow_count = p.arrow_count
+	current_save.player.bomb_count = p.bomb_count
+	current_save.abilities = p.player_abilities.abilities
 	pass
 
 

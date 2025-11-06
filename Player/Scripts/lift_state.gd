@@ -5,6 +5,8 @@ class_name PlayerState_Lift extends PlayerState
 @onready var carry: PlayerState = $"../Carry"
 
 
+var start_anim_late : bool = false
+
 func _ready():
 	pass
 	
@@ -12,6 +14,8 @@ func _ready():
 
 func Enter() -> void:
 	player.UpdateAnimation( "lift" )
+	if start_anim_late == true:
+		player.animation_player.seek( 0.1 )
 	player.animation_player.animation_finished.connect( state_complete )
 	player.audio.stream = lift_audio
 	player.audio.pitch_scale = 2.5
@@ -20,6 +24,7 @@ func Enter() -> void:
 
 
 func Exit() -> void:
+	start_anim_late = false
 	pass
 
 

@@ -26,25 +26,27 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ability"):
-		if swapping == false:
-			swap_item = focus_item
+	if PauseMenu.is_paused == true:
+		if event.is_action_pressed("ability"):
+			if swapping == false:
+				swap_item = focus_item
+				
+				if swap_item.slot_data == null:
+					return
+				
+				swap_item.texture_rect.modulate.a = 0.5
+				swapping = true
+			elif swapping == true:
+				data.swap_items_by_index( swap_item.get_index(), focus_item.get_index() )
+				update_inventory( false )
+				PauseMenu.update_item_description( focus_item.slot_data.item_data.description )
+				swap_item.texture_rect.modulate.a = 1
+				swapping = false
 			
-			if swap_item.slot_data == null:
-				return
-			
-			swap_item.texture_rect.modulate.a = 0.5
-			swapping = true
-		elif swapping == true:
-			data.swap_items_by_index( swap_item.get_index(), focus_item.get_index() )
-			update_inventory( false )
-			PauseMenu.update_item_description( focus_item.slot_data.item_data.description )
-			swap_item.texture_rect.modulate.a = 1
-			swapping = false
-		
-	if event.is_action_pressed("attack"):
-			swap_item.texture_rect.modulate.a = 1
-			swapping = false
+		if event.is_action_pressed("attack"):
+				if swapping == true:
+					swap_item.texture_rect.modulate.a = 1
+					swapping = false
 
 
 func clear_inventory() -> void:

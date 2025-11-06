@@ -13,4 +13,5 @@ script = ExtResource("1_5ujwg")
 name = "Gem"
 description = "A valuable gem"
 texture = SubResource("AtlasTexture_yq8b3")
+cost = 1
 metadata/_custom_type_script = "uid://dvpilf4wrmpeg"

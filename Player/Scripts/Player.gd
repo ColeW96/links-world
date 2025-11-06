@@ -5,6 +5,7 @@ const DIR_4 : Array[ Vector2 ] = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Ve
 var direction : Vector2 = Vector2.ZERO
 var last_facing_direction: Vector2 = Vector2.DOWN
 
+var grappling : bool = false
 var invulnerable : bool = false
 var hp : int = 6
 var max_hp : int = 6
@@ -20,6 +21,10 @@ var attack : int = 1 :
 var defense : int = 1
 var defense_bonus : int = 0
 
+var arrow_count : int = 10 : set = _set_arrow_count
+var bomb_count : int = 10 : set = _set_bomb_count
+
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var lift: PlayerState_Lift = $StateMachine/Lift
 @onready var carry: PlayerState_Carry = $StateMachine/Carry
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -28,6 +33,7 @@ var defense_bonus : int = 0
 @onready var effect_animation_player: AnimationPlayer = $EffectAnimationPlayer
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var held_item: Node2D = $Sprite2D/HeldItem
+@onready var player_abilities: PlayerAbilities = $Abilities
 
 @onready var death: PlayerState_Death = $StateMachine/Death
 
@@ -43,6 +49,7 @@ func _ready():
 	SaveManager.game_loaded.connect( update_damage_values )
 	PlayerManager.player_leveled_up.connect( _on_player_leveled_up )
 	PlayerManager.INVENTORY_DATA.equipment_changed.connect( _on_equipment_changed )
+	defense_bonus = PlayerManager.INVENTORY_DATA.get_defense_bonus()
 	pass
 	
 	
@@ -65,9 +72,7 @@ func _physics_process(_delta):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
-		#PlayerManager.shake_camera()
-		#update_hp(-99)
-		#player_damaged.emit( %AttackHurtBox )
+		print( global_position )
 		return
 	pass
 
@@ -75,7 +80,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func SetDirection() -> bool:
 	if direction == Vector2.ZERO:
 		return false
-		
+	
+	if grappling == true:
+		return false
+	
 	var direction_id : int = int( round( ( direction + cardinal_direction * 0.1 ).angle() / TAU * DIR_4.size() ) )
 	var new_dir = DIR_4[ direction_id ]
 	
@@ -114,7 +122,7 @@ func _take_damage( hurt_box : HurtBox ) -> void:
 		var damage : int = hurt_box.damage
 		
 		if damage > 0:
-			damage = clampi( damage - defense_bonus, 1, damage )
+			damage = clampi( damage - defense - defense_bonus, 1, damage )
 		
 		update_hp( -damage )
 		player_damaged.emit( hurt_box )
@@ -166,3 +174,15 @@ func _on_player_leveled_up() -> void:
 func _on_equipment_changed() -> void:
 	update_damage_values()
 	defense_bonus = PlayerManager.INVENTORY_DATA.get_defense_bonus()
+
+
+func _set_arrow_count( value : int ) -> void:
+	arrow_count = value
+	PlayerHud.update_arrow_count( value )
+	pass
+
+
+func _set_bomb_count( value : int ) -> void:
+	bomb_count = value
+	PlayerHud.update_bomb_count( value )
+	pass

@@ -1,0 +1,79 @@
+class_name PlayerState_Dash extends PlayerState
+
+
+@export var move_speed : float = 150.0
+@export var effect_delay : float = 0.1
+@export var dash_audio : AudioStream
+
+@onready var idle: PlayerState = $"../Idle"
+@onready var attack: PlayerState = $"../Attack"
+
+var direction : Vector2 = Vector2.ZERO
+var next_state : PlayerState = null
+var effect_timer : float = 0.0
+var audio_volume : float = -12.0
+var from_position : float = 0.4
+
+func _ready():
+	pass
+
+
+func Enter() -> void:
+	player.invulnerable = true
+	player.UpdateAnimation( "dash" )
+	player.animation_player.animation_finished.connect( _on_animation_finished )
+	direction = player.direction
+	if direction == Vector2.ZERO:
+		direction = player.cardinal_direction * -1
+	if dash_audio:
+		var pitch_scale = randf_range( 0.9, 1.2 )
+		PlayerManager.play_audio( dash_audio, audio_volume, pitch_scale, from_position )
+	effect_timer = 0
+	pass
+
+
+func Exit() -> void:
+	player.invulnerable = false
+	player.animation_player.animation_finished.disconnect( _on_animation_finished )
+	next_state = null
+	pass
+
+
+func Process(_delta: float) -> PlayerState:
+	player.velocity = direction * move_speed
+	effect_timer -= _delta
+	if effect_timer < 0:
+		effect_timer = effect_delay
+		spawn_effect()
+	return next_state
+
+
+func Physics(_delta: float) -> PlayerState:
+	return null
+
+
+func HandleInput(_event: InputEvent) -> PlayerState:
+	if _event.is_action_pressed("attack"):
+		return attack
+	return null
+
+
+func _on_animation_finished( _anim_name : String ) -> void:
+	next_state = idle
+	pass
+
+
+func spawn_effect() -> void:
+	var effect : Node2D = Node2D.new()
+	player.get_parent().add_child( effect )
+	effect.global_position = player.global_position - Vector2( 0, 0.1 )
+	effect.modulate = Color( 1.5, 0.2, 1.25, 0.75 )
+	
+	var sprite_copy : Sprite2D = player.sprite.duplicate()
+	effect.add_child( sprite_copy )
+	
+	var tween : Tween = create_tween()
+	tween.set_ease( Tween.EASE_OUT )
+	tween.tween_property( effect, "modulate", Color( 1, 1, 1, 0.5 ), 0.2 )
+	tween.chain().tween_callback( effect.queue_free )
+	pass

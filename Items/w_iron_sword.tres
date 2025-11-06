@@ -20,4 +20,5 @@ modifiers = Array[ExtResource("2_ruas2")]([SubResource("Resource_ruas2")])
 name = "Iron Sword"
 description = "A standard sword made of iron"
 texture = SubResource("AtlasTexture_inskq")
+cost = 200
 metadata/_custom_type_script = "uid://bjr4dqi2avaiq"

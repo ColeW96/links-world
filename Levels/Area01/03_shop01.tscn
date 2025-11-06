@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bbtgqfw47ukxe"]
+[gd_scene load_steps=17 format=4 uid="uid://bbtgqfw47ukxe"]
 
 [ext_resource type="Script" uid="uid://w8x63rjkjqpr" path="res://Levels/Scripts/level.gd" id="1_frm1v"]
 [ext_resource type="PackedScene" uid="uid://bf3y5h0wx803g" path="res://TileMaps/interior_house_tilemap.tscn" id="2_8xg67"]
@@ -8,6 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bsfke41cqr52n" path="res://Levels/level_transition.tscn" id="6_cuk0f"]
 [ext_resource type="PackedScene" uid="uid://bou6q1jldcf6f" path="res://Interactables/TreasureChest/treasure_chest.tscn" id="7_dtsyn"]
 [ext_resource type="Resource" uid="uid://cm5vr4l6nufpd" path="res://Items/w_katana.tres" id="8_xdoxx"]
+[ext_resource type="PackedScene" uid="uid://cemqodyx1wiu8" path="res://Interactables/shopkeeper/shopkeeper.tscn" id="9_xdoxx"]
+[ext_resource type="Script" uid="uid://dvpilf4wrmpeg" path="res://Items/Scripts/item_data.gd" id="10_e8w5f"]
+[ext_resource type="Resource" uid="uid://bq2ynt3c5q8ro" path="res://Items/apple.tres" id="11_xat5e"]
+[ext_resource type="Resource" uid="uid://ba0rx61mbk3i4" path="res://Items/a_ninja_suit.tres" id="12_qee8w"]
+[ext_resource type="Resource" uid="uid://bueuel32iixdm" path="res://Items/potion.tres" id="13_b8dv1"]
+[ext_resource type="Resource" uid="uid://wmfm1j1grudg" path="res://Items/w_iron_sword.tres" id="14_uwyag"]
+[ext_resource type="Resource" uid="uid://c0vnwirpebdws" path="res://Items/stone.tres" id="15_peerp"]
+[ext_resource type="Resource" uid="uid://ci26no8k3b25t" path="res://Items/gem.tres" id="16_xat5e"]
 
 [node name="03Shop01" type="Node2D"]
 y_sort_enabled = true
@@ -99,3 +107,13 @@ side = 3
 [node name="TreasureChest" parent="." instance=ExtResource("7_dtsyn")]
 position = Vector2(304, 99)
 item_data = ExtResource("8_xdoxx")
+
+[node name="Shopkeeper" parent="." instance=ExtResource("9_xdoxx")]
+y_sort_enabled = true
+position = Vector2(321, 176)
+shop_inventory = Array[ExtResource("10_e8w5f")]([ExtResource("11_xat5e"), ExtResource("12_qee8w"), ExtResource("13_b8dv1"), ExtResource("14_uwyag"), ExtResource("8_xdoxx"), ExtResource("15_peerp")])
+
+[node name="TreasureChest2" parent="." instance=ExtResource("7_dtsyn")]
+position = Vector2(254.21112, 203.77832)
+item_data = ExtResource("16_xat5e")
+quantity = 200

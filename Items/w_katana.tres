@@ -21,4 +21,5 @@ modifiers = Array[ExtResource("2_50xaj")]([SubResource("Resource_dchiq")])
 name = "Katana"
 description = "A blade made from folded steel. Very Cutty."
 texture = SubResource("AtlasTexture_inskq")
+cost = 500
 metadata/_custom_type_script = "uid://bjr4dqi2avaiq"

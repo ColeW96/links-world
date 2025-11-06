@@ -18,6 +18,12 @@ var hearts : Array[ HeartsGUI ] = []
 @onready var boss_label: Label = $Control/BossUI/Label
 @onready var notification_popup: NotificationUI = $Control/Notification
 
+@onready var abilities: Control = $Control/Abilities
+@onready var ability_items: HBoxContainer = $Control/Abilities/HBoxContainer
+@onready var arrow_count_label: Label = %ArrowCountLabel
+@onready var bomb_count_label: Label = %BombCountLabel
+
+
 
 func _ready() -> void:
 	for child in $Control/HFlowContainer.get_children():
@@ -33,6 +39,10 @@ func _ready() -> void:
 	LevelManager.level_load_started.connect( hide_game_over_screen )
 	LevelManager.level_load_started.connect( hide_boss_health )
 	hide_boss_health()
+	
+	update_ability_ui(0)
+	PauseMenu.shown.connect( _on_show_pause )
+	PauseMenu.hidden.connect( _on_hide_pause )
 	pass
 	
 	
@@ -143,4 +153,46 @@ func update_boss_health( hp : int, max_hp : int ) -> void:
 
 func queue_notification( _title : String, _message : String ) -> void:
 	notification_popup.add_notification_to_queue( _title, _message )
+	pass
+
+
+func update_ability_items( items : Array[ String ] ) -> void:
+	var ability_textures : Array[ Node ] = ability_items.get_children()
+	for i in ability_textures.size():
+		if items[ i ] == "":
+			ability_textures[ i ].visible = false
+		else:
+			ability_textures[ i ].visible = true
+	pass
+
+
+
+func update_ability_ui( ability_index : int ) -> void:
+	var _items : Array[ Node ] = ability_items.get_children()
+	for i in _items:
+		i.self_modulate = Color( 1, 1, 1, 0 )
+		i.modulate = Color( 0.6, 0.6, 0.6, 0.8 )
+	_items[ ability_index ].self_modulate = Color( 1, 1, 1, 1 )
+	_items[ ability_index ].modulate = Color( 1, 1, 1, 1 )
+	play_audio( button_focus_audio )
+	pass
+
+
+func update_arrow_count( count : int ) -> void:
+	arrow_count_label.text = str( count )
+	pass
+
+
+func update_bomb_count( count : int ) -> void:
+	bomb_count_label.text = str( count )
+	pass
+
+
+func _on_show_pause() -> void:
+	abilities.visible = false
+	pass
+
+
+func _on_hide_pause() -> void:
+	abilities.visible = true
 	pass

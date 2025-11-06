@@ -7,7 +7,7 @@ class_name Throwable extends Area2D
 @export var throw_starting_height : float = 30.0
 
 var picked_up : bool = false
-var throwable : Node2D
+var prop : Node2D
 var throw_direction : Vector2
 var object_sprite : Sprite2D
 var vertical_velocity : float = 0.0
@@ -22,12 +22,12 @@ var destroyed : bool = false
 func _ready() -> void:
 	area_entered.connect( _on_area_enter )
 	area_exited.connect( _on_area_exit )
-	throwable = get_parent()
-	setup_hurtbox()
+	prop = get_parent()
+	setup_collision_boxes()
 	
-	object_sprite = throwable.find_child("Sprite2D")
+	object_sprite = prop.find_child("Sprite2D")
 	ground_height = object_sprite.position.y
-	animation_player = throwable.find_child("AnimationPlayer")
+	animation_player = prop.find_child("AnimationPlayer")
 	set_physics_process( false )
 	pass
 
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			hit_ground()
 		
 	vertical_velocity += gravity_strength * delta
-	throwable.position += throw_direction * throw_speed * delta
+	prop.position += throw_direction * throw_speed * delta
 	pass
 
 
@@ -53,12 +53,12 @@ func player_interact() -> void:
 		
 	if picked_up == false:
 		PlayerManager.interact_handled = true
-		disable_collisions( throwable )
-		if throwable.get_parent():
-			throwable.get_parent().remove_child( throwable )
-		PlayerManager.player.held_item.add_child( throwable )
-		throwable.position = Vector2.ZERO
-		throwable.z_index = 0
+		disable_collisions( prop )
+		if prop.get_parent():
+			prop.get_parent().remove_child( prop )
+		PlayerManager.player.held_item.add_child( prop )
+		prop.position = Vector2.ZERO
+		prop.z_index = 0
 		PlayerManager.player.pickup_item( self )
 		area_entered.disconnect( _on_area_enter )
 		area_exited.disconnect( _on_area_exit )
@@ -66,12 +66,12 @@ func player_interact() -> void:
 
 
 func throw() -> void:
-	throwable.get_parent().remove_child( throwable )
-	PlayerManager.player.get_parent().call_deferred( "add_child", throwable )
-	throwable.position = PlayerManager.player.position
+	prop.get_parent().remove_child( prop )
+	PlayerManager.player.get_parent().call_deferred( "add_child", prop )
+	prop.position = PlayerManager.player.position
 	object_sprite.position.y = -throw_starting_height
 	vertical_velocity = -throw_height_strength
-	throwable.z_index = 1
+	prop.z_index = 1
 	set_physics_process( true )
 	hurt_box.set_deferred("monitoring", true)
 	hurt_box.did_damage.connect( did_damage )
@@ -80,13 +80,13 @@ func throw() -> void:
 
 
 func drop() -> void:
-	throwable.get_parent().remove_child( throwable )
-	PlayerManager.player.get_parent().call_deferred( "add_child", throwable )
-	throwable.position = PlayerManager.player.position
+	prop.get_parent().call_deferred( "remove_child", prop )
+	PlayerManager.player.get_parent().call_deferred( "add_child", prop )
+	prop.position = PlayerManager.player.position
 	object_sprite.position.y = -throw_starting_height
 	vertical_velocity = -60
 	throw_speed = 50
-	throwable.z_index = 1
+	prop.z_index = 1
 	set_physics_process( true )
 	wall_detect.body_entered.connect( _on_body_entered )
 	pass
@@ -97,7 +97,7 @@ func destroy() -> void:
 	if animation_player:
 		animation_player.play("destroy")
 		await animation_player.animation_finished
-	throwable.queue_free()
+	prop.queue_free()
 	destroyed = true
 	pass
 
@@ -126,11 +126,10 @@ func _on_area_exit( _a : Area2D ) -> void:
 func _on_body_entered( _n : Node2D ) -> void:
 	if _n is TileMapLayer:
 		did_damage()
-		print( "wall hit" )
 	pass
 
 
-func setup_hurtbox() -> void:
+func setup_collision_boxes() -> void:
 	hurt_box.monitoring = false
 	for c in get_children():
 		if c is CollisionShape2D:

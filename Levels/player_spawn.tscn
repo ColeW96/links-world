@@ -11,4 +11,4 @@ modulate = Color(0.07846785, 1, 0, 0.55200005)
 position = Vector2(0, -9)
 texture = ExtResource("1_y6scc")
 hframes = 4
-vframes = 29
+vframes = 33

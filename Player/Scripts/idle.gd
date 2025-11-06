@@ -3,6 +3,7 @@ class_name PlayerState_Idle extends PlayerState
 @onready var move: PlayerState = $"../Move"
 @onready var roll: PlayerState = $"../Roll"
 @onready var attack: PlayerState = $"../Attack"
+@onready var dash: PlayerState = $"../Dash"
 
 func Enter() -> void:
 	player.UpdateAnimation("idle")
@@ -27,8 +28,10 @@ func Physics(_delta: float) -> PlayerState:
 func HandleInput(_event: InputEvent) -> PlayerState:
 	if _event.is_action_pressed("roll"):
 		return roll
-	if _event.is_action_pressed("attack"):
+	elif _event.is_action_pressed("attack"):
 		return attack
-	if _event.is_action_pressed("interact"):
+	elif _event.is_action_pressed("interact"):
 		PlayerManager.interact()
+	elif _event.is_action_pressed("dash"):
+		return dash
 	return null
